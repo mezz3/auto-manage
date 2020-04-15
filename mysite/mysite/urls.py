@@ -16,10 +16,14 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
+# from vmtopo import views
 from authen import views
+# from . import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
 
+    path('login/', views.login, name='login'),
     path('', views.index, name='index'),
+    # path('vmtopo/', views.vmtopo, name='vmtopo'),
 ]
