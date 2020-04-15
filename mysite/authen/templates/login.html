@@ -1,21 +1,25 @@
 {% extends "base.html" %}
 {% block content %}
-    <div class="container">
+{% load static %}
+<head>
+    <link rel="stylesheet" href="{% static 'assets\css\login.css' %}" />
+</head>
+    <div class="container" style='margin-bottom: 10%; margin-top: 6%;'>
     <br><br><br>
         <h1>Network Lab KMITL</h1>
         <br/><br/>
         <form method="GET" action="{% url 'index' %}">
             <div class="form-group">
                 <label for="username">Username:</label>
-                <input type="text" class="form-control ml-3" id="username" 
+                <input type="text" placeholder="Enter Username" class="form-control ml-3" id="username" 
                     name="username" value="{{username}}">
             </div>
             <div class="form-group">
                 <label for="password">Password:</label>
-                <input type="password" class="form-control ml-3" id="password" 
+                <input type="password" placeholder="Enter Password" class="form-control ml-3" id="password" 
                     name="password" value="{{password}}">
             </div>
-            <button type="submit" class="btn btn-primary ml-3">Login</button>
+            <button type="submit" class="btn btn-primary ml-3" style='margin-left: 95% !important;'>Login</button>
         </form>
         <br/><br/>
     </div>
