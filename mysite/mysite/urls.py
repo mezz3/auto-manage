@@ -27,5 +27,5 @@ urlpatterns = [
     # path('', views.index, name='index'),
     path('auth/', include('authen.urls')),
     path('vmtopo/', include('vmtopo.urls')),
-    path('logout/', views.log_out, name='logout'),
+    path('logout/', views.log_out, name='logout')
 ]

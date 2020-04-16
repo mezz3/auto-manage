@@ -28,7 +28,7 @@ deactivate () {
     fi
 
     unset VIRTUAL_ENV
-    if [ ! "$1" = "nondestructive" ] ; then
+    if [ ! "${1:-}" = "nondestructive" ] ; then
     # Self destruct!
         unset -f deactivate
     fi
@@ -37,7 +37,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="C:\Users\user\Desktop\auto-manage\env"
+VIRTUAL_ENV="C:\Users\Kani\Documents\GitHub\auto-manage\env"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"
