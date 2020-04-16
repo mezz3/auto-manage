@@ -7,3 +7,6 @@ def vmtopo(request):
 
 def index(request):
     return render(request, template_name='index.html')
+
+def vmtopodetail(request):
+    return render(request, template_name='vmtopodetial.html')
