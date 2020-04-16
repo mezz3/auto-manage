@@ -3,4 +3,4 @@ from django.http import HttpResponse
 
 # Create your views here.
 def vmtopo(request):
-    return render(request, 'vmtopo.html')
+    return render(request, template_name='vmtopo.html')
