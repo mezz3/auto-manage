@@ -1,22 +1,16 @@
-{% extends "base.html" %}
+{% extends "base2.html" %}
 {% block content %}
 {% load static %}
-<head>
-    <link rel="stylesheet" href="{% static 'asset\base.css' %}" />
-</head>
     <div class="container">
         <h1>Welcome to Class Attendance System</h1>
         <br/><br/>
         <table class="table">
             <thead>
                 <tr>
-                    <th  href="#" class="w3-bar-item w3-button" scope="col">Time</th>
-                    <th href="#" class="w3-bar-item w3-button" scope="col">Subject</th>
-                    <th href="#" class="w3-bar-item w3-button" scope="col">Section</th>
-                    <th href="#" class="w3-bar-item w3-button" scope="col">Room</th>
-                    <th href="#" class="w3-bar-item w3-button" scope="col">Student amount</th>
-                    <th href="#" class="w3-bar-item w3-button" scope="col">Detail</th>
-                    <th href="#" class="w3-bar-item w3-button" scope="col">Check in</th>
+                    <th scope="col">Template Project</th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
                 </tr>
             </thead>
 
@@ -24,7 +18,7 @@
                 <tr>
                     <td>test</td>
                     <td>
-                        <a href="#">
+                        <a href="{% url 'topo' %}">
                             <div class="btn btn-warning" id="id">View Topo</div>
                         </a>
                     </td>

@@ -5,8 +5,6 @@ from django.http import HttpResponse
 def vmtopo(request):
     return render(request, template_name='vmtopo.html')
 
-def index(request):
-    return render(request, template_name='index.html')
 
-def vmtopodetail(request):
-    return render(request, template_name='vmtopodetial.html')
+def topo(request):
+    return render(request, template_name='topo.html')
