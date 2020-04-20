@@ -1,10 +1,50 @@
-{% extends "base2.html" %}
-{% block content %}
 {% load static %}
-    <br><br><br>
-    <div class="container">
-        <h1>Welcome to Class Attendance System</h1>
-        <br/><br/>
-    </div>
-    <br><br>
-{% endblock %}
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>KMITL Lab Network</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="{% static 'asset\main.css' %}" />
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+	</head>
+    <div class="w3-top">
+  <div class="w3-bar w3-white w3-wide w3-padding w3-card">
+    <a href="{% url 'index' %}" class="w3-bar-item w3-button"><b>KMITL</b> Lab Network</a>
+    <a href="#" class="w3-bar-item w3-button" style='margin-right: 53.6%;'>Performance</a>
+    <a href="{% url 'logout' %}" class="w3-bar-item w3-button">Log out</a>
+    <a href="#" class="w3-bar-item w3-button"><b>My Profile</b></a>
+  </div>
+</div>
+	<body class="is-preload">
+
+		<!-- Header -->
+			<div id="header">
+
+				<div class="top">
+					<!-- Nav -->
+						<nav id="nav">
+							<ul>
+								<li><a href="#top" id="top-link"><span class="icon solid fa-home"></span></a></li>
+								<li><a href="#portfolio" id="portfolio-link"><span class="icon solid "></span></a></li>
+								<li><a href="#about" id="about-link"><span class="icon solid "></span></a></li>
+								<li><a href="#contact" id="contact-link"><span class="icon solid"></span></a></li>
+							</ul>
+						</nav>
+
+				</div>
+
+			</div>
+
+		<!-- Main -->
+			<div id="main">
+				<!-- main topo -->
+					<section id="top">
+						<div class="container">
+
+						</div>
+					</section>
+			</div>
+
+	</body>
+</html>
