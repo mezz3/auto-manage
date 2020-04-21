@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'authen',
     'management',
     'vmtopo',
+    'nwtopo',
 ]
 
 MIDDLEWARE = [
