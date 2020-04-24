@@ -25,7 +25,7 @@ urlpatterns = [
 
     # path('login/', views.login, name='login'),
     # path('', views.index, name='index'),
-    path('auth/', include('authen.urls')),
+    path('', include('authen.urls')),
     path('vmtopo/', include('vmtopo.urls')),
     path('nwtopo/', include('nwtopo.urls')),
     path('logout/', views.log_out, name='logout'),
