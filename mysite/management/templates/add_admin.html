@@ -1,0 +1,79 @@
+{% extends "base2.html" %}
+{% block content %}
+{% load static %}
+<head>
+    <link rel="stylesheet" href="{% static 'asset\content.css' %}">
+</head>
+<div class="container">
+        <br><br>
+       <div class="container site-content">
+        <div class="row">
+            <div id="main" class="site-main col-sm-12 full-width"> <!-- delete id -->
+                <article id="post-11500" class="post-11500 page type-page status-publish hentry pmpro-has-access"> <!-- delete id+class -->
+                    <div class="entry-content">
+                        <div data-vc-full-width="true" data-vc-full-width-init="true" class="vc_row wpb_row vc_row-fluid entry">
+                            <div class="wpb_column vc_column_contain vc_col-sm-12">
+                                <div class="vc_column_inner">
+                                    <div class="wpb_wrap">
+                                        <div class="vc_contain" data-vc-action="collapse">
+                                            <div class="vc vc_general vc_spacing vc_color">
+                                                <div class="vc_tab-contain">
+                                                    <ul class="vc_tab-list">
+                                                        <li class="vc_tab vc_active" style="background: #fff;" data-vc-tab>
+                                                            <a href="{% url 'add_admin' %}" class="vc">
+                                                                <span class="vc_title-text">เพิ่มผู้ดูแล</span>
+                                                            </a>
+                                                        </li>
+                                                        <li class="vc_tab" data-vc-tab>
+                                                            <a href="{% url 'delete_admin' %}" class="vc">
+                                                                <span class="vc_title-text"  style="color: #fff;">ลบผู้ดูแล</span>
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                        
+
+                                                <div class="vc_panel-contain">
+                                                    <div class="vc_panels">
+                                                        <div class="vc_panel vc_active">
+                                                            <div class="vc_panel-body">
+                                                                <div class="vc_border">
+                                                                    <div class="from-group container">
+                                                                        <form method='POST' action="{% url 'add_admin' %}" enctype='multipart/form-data'>
+                                                                        {% csrf_token %}
+                                                                        {% for field in form %}
+                                                                            <div class="form-group">
+                                                                                <label for="{{field.id_for_label}}">{{field.label}}</label>
+                                                                                {{field}}
+                                                                                <h6 style='color: red;'>{{field.errors}}</h6>
+                                                                            </div>
+                                                                        {% endfor %}
+                                                                        <h6 style='color: red;'>{{ form.non_field_errors }}</h6>
+                                                                        <div>
+                                                                            <button class="button btn btn-primary" type="submit" name='register'>เพิ่มผู้ดูแล</button>
+                                                                        </div>
+                                                                        </form>
+
+                                                                    </div>
+                                                        
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </div>
+
+</div>
+<br><br>
+{% endblock %}

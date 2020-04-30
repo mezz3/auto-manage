@@ -28,5 +28,6 @@ urlpatterns = [
     path('', include('authen.urls')),
     path('vmtopo/', include('vmtopo.urls')),
     path('nwtopo/', include('nwtopo.urls')),
+    path('manage/', include('management.urls')),
     path('logout/', views.log_out, name='logout'),
 ]
