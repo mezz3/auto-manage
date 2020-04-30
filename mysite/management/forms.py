@@ -50,3 +50,9 @@ class AddadminForm(forms.Form):
     email.widget.attrs.update({'class': 'form-control'})
     password1.widget.attrs.update({'class': 'form-control'})
     password2.widget.attrs.update({'class': 'form-control'})
+
+
+class AdminSearchForm(forms.Form):
+    username = forms.CharField(label='ชื่อผู้ใช้งาน', min_length=4, max_length=150, required=False)
+
+    username.widget.attrs.update({'class': 'form-control'})
