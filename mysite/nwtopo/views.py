@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 
-from nwtopo.forms import CreateForm
+from nwtopo.forms import CreateForm, CreateTempForm
 
 # Create your views here.
 @login_required
@@ -17,4 +17,5 @@ def topo(request):
 
 @login_required
 def create(request):
-    return render(request, 'create.html')
+    form = CreateTempForm(request.POST)
+    return render(request, 'create.html', {'form': form})
