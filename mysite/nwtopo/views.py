@@ -9,6 +9,12 @@ def nwtopo(request):
     form = CreateForm(request.POST)
     return render(request, 'nwtopo.html', {'form': form})
 
+
 @login_required
 def topo(request):
     return render(request, 'topo_nw.html')
+
+
+@login_required
+def create(request):
+    return render(request, 'create.html')

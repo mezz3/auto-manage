@@ -40,3 +40,13 @@ def delete(request, user_id):
     user.delete()
 
     return redirect('delete_admin')
+
+
+@login_required
+def manage_vm(request):
+    return render(request, 'managevm.html')
+
+
+@login_required
+def delete_vm(request):
+    return render(request, 'delete_vm.html')

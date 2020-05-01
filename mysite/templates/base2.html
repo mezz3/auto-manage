@@ -13,8 +13,8 @@
   <div class="w3-bar w3-white w3-wide w3-padding w3-card">
     <a href="{% url 'index' %}" class="w3-bar-item w3-button"><b>KMITL</b> Lab Network</a>
     <a href="#" class="w3-bar-item w3-button">Performance</a>
-    <a href="#" class="w3-bar-item w3-button">Manage VM</a>
-    <a href="#" class="w3-bar-item w3-button">Create</a>
+    <a href="{% url 'manage_vm' %}" class="w3-bar-item w3-button">Manage VM</a>
+    <a href="{% url 'create' %}" class="w3-bar-item w3-button">Create</a>
     <a href="{% url 'add_admin' %}" class="w3-bar-item w3-button">Manage user</a>
     <a href="{% url 'profile' %}" class="w3-bar-item w3-button" style='float: right;'><b>My Profile</b></a>
     <a href="{% url 'logout' %}" class="w3-bar-item w3-button" style='float: right;'>Log out</a>
