@@ -39,20 +39,21 @@
                                                             <div class="vc_panel-body">
                                                                 <div class="vc_border">
                                                                     <div class="from-group container">
-                                                                        {% comment %} <form method='POST' action="{% url 'add_admin' %}" enctype='multipart/form-data'>
+                                                                        <form method='POST' action="{% url 'add_admin' %}" enctype='multipart/form-data'>
                                                                         {% csrf_token %}
-                                                                        {% for field in form %}
+                                                                            {{ form }}
+                                                                        {% comment %} {% for field in form %}
                                                                             <div class="form-group">
                                                                                 <label for="{{field.id_for_label}}">{{field.label}}</label>
                                                                                 {{field}}
                                                                                 <h6 style='color: red;'>{{field.errors}}</h6>
                                                                             </div>
                                                                         {% endfor %}
-                                                                        <h6 style='color: red;'>{{ form.non_field_errors }}</h6>
-                                                                        <div>
-                                                                            <button class="button btn btn-primary" type="submit" name='register'>เพิ่มผู้ดูแล</button>
+                                                                        <h6 style='color: red;'>{{ form.non_field_errors }}</h6> {% endcomment %}
+                                                                        <div style='margin-top: 3%'>
+                                                                            <button style='float: right' class="button btn btn-primary" type="submit">สร้าง</button>
                                                                         </div>
-                                                                        </form> {% endcomment %}
+                                                                        </form>
 
                                                                     </div>
                                                         

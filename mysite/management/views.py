@@ -4,7 +4,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.db.models.deletion import SET_DEFAULT
 
-from management.forms import AddadminForm, AdminSearchForm
+from management.forms import AddadminForm, AdminSearchForm, CreateVMForm
 
 # Create your views here.
 @login_required
@@ -44,7 +44,8 @@ def delete(request, user_id):
 
 @login_required
 def manage_vm(request):
-    return render(request, 'managevm.html')
+    form = CreateVMForm(request.POST)
+    return render(request, 'managevm.html', {'form': form})
 
 
 @login_required
