@@ -6,19 +6,69 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="{% static 'asset\base.css' %}" />
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+{% comment %} <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> {% endcomment %}
 <body>
+
+<style>
+.dropbtn {
+  border: none;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: fixed;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {background-color: #ddd;}
+
+.dropdown:hover .dropdown-content {display: block;}
+
+.dropdown:hover .dropbtn {background-color: #3e8e41;}
+</style>
 
 <!-- Navbar (sit on top) -->
 <div class="w3-top">
   <div class="w3-bar w3-white w3-wide w3-padding w3-card">
-    <a href="{% url 'index' %}" class="w3-bar-item w3-button"><b>KMITL</b> Lab Network</a>
-    <a href="#" class="w3-bar-item w3-button">Performance</a>
-    <a href="{% url 'manage_vm' %}" class="w3-bar-item w3-button">Manage VM</a>
-    <a href="{% url 'create' %}" class="w3-bar-item w3-button">Create</a>
-    <a href="#" class="w3-bar-item w3-button">VM IP</a>
-    <a href="{% url 'add_admin' %}" class="w3-bar-item w3-button">Manage user</a>
-    <a href="{% url 'profile' %}" class="w3-bar-item w3-button" style='float: right;'><b>My Profile</b></a>
-    <a href="{% url 'logout' %}" class="w3-bar-item w3-button" style='float: right;'>Log out</a>
+    <a href="{% url 'index' %}" class="w3-bar-item w3-button" style='margin-right: 2%'><b>KMITL Lab Network</b></a>
+    <a href="{% url 'create' %}" class="w3-bar-item w3-button">Send Template</a>
+    <a href="#" class="w3-bar-item w3-button">Make IP Report</a>
+    
+    <div class="dropdown" style='float: right; margin-right: 100px'>
+      <button class="dropbtn" style='background-color: white !important; padding: 0px !important; margin: 0px !important'>
+        <img src="{% static 'img\user.png' %}" style='width: 45px; height: 35px'/>
+      </button>
+      <div class="dropdown-content">
+        <a href="{% url 'profile' %}" class="w3-bar-item w3-button"><b>My Profile</b></a>
+        <a href="{% url 'logout' %}" class="w3-bar-item w3-button">Log out</a>
+      </div>
+    </div>
+
+    <div class="dropdown" style='float: right; margin-right: 50px; margin-top: 9px'>
+      <button class="dropbtn" style='background-color: white !important; padding: 0px !important; margin: 0px !important; color: black !important;'>
+        Manage
+      </button>
+      <div class="dropdown-content">
+        <a href="{% url 'add_admin' %}" class="w3-bar-item w3-button">Manage user</a>
+        <a href="{% url 'manage_vm' %}" class="w3-bar-item w3-button">Manage VM</a>
+      </div>
+    </div>
+
   </div>
 </div>
 
@@ -30,6 +80,24 @@
 <footer class="w3-center w3-black w3-padding-16">
   <p>Present by PROJECT2</p>
 </footer>
+
+<script>
+/* When the user clicks on the button, 
+toggle between hiding and showing the dropdown content */
+function myFunction() {
+  document.getElementById("myDropdown").classList.toggle("show");
+}
+
+// Close the dropdown if the user clicks outside of it
+window.onclick = function(e) {
+  if (!e.target.matches('.dropbtn')) {
+  var myDropdown = document.getElementById("myDropdown");
+    if (myDropdown.classList.contains('show')) {
+      myDropdown.classList.remove('show');
+    }
+  }
+}
+</script>
 
 </body>
 </html>
