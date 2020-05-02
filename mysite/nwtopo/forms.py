@@ -14,5 +14,7 @@ class CreateForm(forms.Form):
 
 class CreateTempForm(forms.Form):
     temp = forms.ChoiceField(required=False, choices = TEMP_CHOICES, label='Template ที่ต้องการสร้าง')
+    temp_amount = forms.IntegerField(label='จำนวนที่ต้องการสร้าง', required=False)
 
     temp.widget.attrs.update({'class': 'form-control'})
+    temp_amount.widget.attrs.update({'class': 'form-control'})
