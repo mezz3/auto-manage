@@ -5,6 +5,8 @@ from django.contrib.auth.models import User, auth
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
 from django.contrib.auth.decorators import login_required
+# from Script import VMware.VimAutomation.Core
+import subprocess, sys, Scripts
 
 
 # Create your views here.
@@ -18,7 +20,14 @@ def login(request):
         user = auth.authenticate(username=username, password=password)
         if user is not None:
             auth.login(request, user)
-            print('user: ')
+            # print('user: ')
+            # import subprocess
+            handle = subprocess.Popen([
+                'powershell.exe',
+                'static\\Scripts\\login.ps1',
+            ], stdout=sys.stdout)
+            # output = handle.stdout.read().decode('utf-8')
+            print(handle.communicate())
             return redirect('/index')
         else:
             messages.info(request, 'ชื่อผู้ใช้งาน หรือรหัสผิดพลาด')
