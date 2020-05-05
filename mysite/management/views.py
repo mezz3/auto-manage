@@ -3,6 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.db.models.deletion import SET_DEFAULT
+import subprocess, sys, Scripts
 
 from management.forms import AddadminForm, AdminSearchForm, CreateVMForm
 
@@ -11,7 +12,6 @@ from management.forms import AddadminForm, AdminSearchForm, CreateVMForm
 def register(request):
     if request.method == 'POST':
         form = AddadminForm(request.POST)
-        # print(request.POST)
         if form.is_valid():
             form.save()
             return redirect('delete_admin')
@@ -44,7 +44,19 @@ def delete(request, user_id):
 
 @login_required
 def manage_vm(request):
-    form = CreateVMForm(request.POST)
+    # form = CreateVMForm(request.POST)
+    if request.method == 'POST':
+        form = CreateVMForm(request.POST)
+        if form.is_valid():
+            # form.save()
+            clone = subprocess.Popen([
+                'powershell.exe',
+                'static\\Scripts\\createVM.ps1',
+            ], stdout=sys.stdout)
+            print(clone.communicate())
+            return redirect('manage_vm')
+    else:
+        form = CreateVMForm()
     return render(request, 'managevm.html', {'form': form})
 
 
