@@ -25,10 +25,6 @@ $vm_count = "1"
 
 $clone = "GNS3 VM"
 
-$ds = "Data Store01"
-
-$Folder = "test"
-
 $Cluster = "10.0.10.20"
 
 $VM_prefix = "gns3vm-"
