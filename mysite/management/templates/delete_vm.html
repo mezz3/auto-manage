@@ -39,9 +39,9 @@
                                                             <div class="vc_panel-body">
                                                                 <div class="vc_border">
                                                                     <div class="from-group container">
-                                                                        {% comment %} <form method='POST' action="{% url 'add_admin' %}" enctype='multipart/form-data'>
+                                                                        <form method='GET' action="{% url 'delete_vm' %}" enctype='multipart/form-data'>
                                                                         {% csrf_token %}
-                                                                        {% for field in form %}
+                                                                        {% comment %} {% for field in form %}
                                                                             <div class="form-group">
                                                                                 <label for="{{field.id_for_label}}">{{field.label}}</label>
                                                                                 {{field}}
@@ -51,8 +51,35 @@
                                                                         <h6 style='color: red;'>{{ form.non_field_errors }}</h6>
                                                                         <div>
                                                                             <button class="button btn btn-primary" type="submit" name='register'>เพิ่มผู้ดูแล</button>
-                                                                        </div>
-                                                                        </form> {% endcomment %}
+                                                                        </div> {% endcomment %}
+                                                                        </form>
+                                                                        <br/><br/>
+                                                                        {{ test }}
+                                                                            {% comment %} <table class="table">
+                                                                                <thead>
+                                                                                    <tr>
+                                                                                        <th scope="col">ชื่อผู้ใช้งาน</th>
+                                                                                        <th scope="col">E-mail</th>
+                                                                                        <th scope="col">วันที่เข้าร่วม</th>
+                                                                                        <th scope="col"></th>
+                                                                                    </tr>
+                                                                                </thead>
+                                                                                 <tbody>
+                                                                                {% for list in vm_list %}
+                                                                                    <tr>
+                                                                                        <td>{{ user.username }}</td>
+                                                                                        <td>{{ user.email }}</td>
+                                                                                        <td>{{ user.date_joined }}</td>
+                                                                                        <td>
+                                                                                            <a href="{% url 'delete' user_id=user.id %}">
+                                                                                                <div class="btn btn-danger">ลบ</div>
+                                                                                            </a>
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                {% endfor %}
+                                                                                </tbody>
+                                                                               
+                                                                            </table> {% endcomment %}
 
                                                                     </div>
                                                         

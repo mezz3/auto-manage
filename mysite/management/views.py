@@ -4,6 +4,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.db.models.deletion import SET_DEFAULT
 import subprocess, sys, Scripts
+from subprocess import check_output
 
 from management.forms import AddadminForm, AdminSearchForm, CreateVMForm
 
@@ -71,4 +72,17 @@ def manage_vm(request):
 
 @login_required
 def delete_vm(request):
-    return render(request, 'delete_vm.html')
+    vm_list = subprocess.Popen([
+        'powershell.exe',
+        'static\\Scripts\\getVM.ps1',
+    ], stdout=sys.stdout)
+    print(vm_list)
+
+    test = check_output([
+        'powershell.exe',
+        'static\\Scripts\\getVM.ps1',
+    ])
+    print(test)
+    # print(vm.sys.stdout)
+    # vm_list = vm.communicate()
+    return render(request, 'delete_vm.html', {'test': test})
