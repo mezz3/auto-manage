@@ -41,7 +41,15 @@
                                                                     <div class="from-group container">
                                                                         <form method='POST' action="{% url 'manage_vm' %}" enctype='multipart/form-data'>
                                                                         {% csrf_token %}
-                                                                            {{ form }}
+                                                                        {% for field in form %}
+                                                                            <div class="form-group">
+                                                                                <label for="{{field.id_for_label}}">{{field.label}}</label>
+                                                                                {{field}}
+                                                                                <h6 style='color: red;'>{{field.errors}}</h6>
+                                                                            </div>
+                                                                        {% endfor %}
+                                                                        <h6 style='color: red;'>{{ form.non_field_errors }}</h6>
+                                                                            {% comment %} {{ form }} {% endcomment %}
                                                                         <div style='margin-top: 3%'>
                                                                             <button style='float: right' class="button btn btn-primary" type="submit">สร้าง</button>
                                                                         </div>

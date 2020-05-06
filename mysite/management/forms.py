@@ -61,4 +61,14 @@ class AdminSearchForm(forms.Form):
 class CreateVMForm(forms.Form):
     vm_amount = forms.IntegerField(label='จำนวน VM ที่ต้องการสร้าง', required=False)
 
+    def clean_vm_amount(self):
+        vm_amount = self.cleaned_data['vm_amount']
+        try:
+            if vm_amount <= 0:
+                raise  forms.ValidationError("จำนวน Virtual Machine ที่ต้องการสร้างต้องมากกว่า 0")
+            return vm_amount
+        except TypeError:
+            raise  forms.ValidationError("กรุณาใส่จำนวน Virtual Machine ที่ต้องการก่อนกดสร้าง")
+            return vm_amount
+
     vm_amount.widget.attrs.update({'class': 'form-control'})

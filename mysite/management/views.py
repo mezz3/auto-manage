@@ -44,11 +44,11 @@ def delete(request, user_id):
 
 @login_required
 def manage_vm(request):
-    # form = CreateVMForm(request.POST)
     if request.method == 'POST':
         form = CreateVMForm(request.POST)
         if form.is_valid():
             # form.save()
+            print(request.POST)
             clone = subprocess.Popen([
                 'powershell.exe',
                 'static\\Scripts\\createVM.ps1',
