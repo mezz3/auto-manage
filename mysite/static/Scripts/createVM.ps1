@@ -1,8 +1,11 @@
+Param([int]$vm_count)
+
 $vCenter="10.0.15.39"
 $vCenterUser="Administrator@vsphere.local"
 $vCenterUserPassword="Qwerty1@#$"
 
-$vm_count = 5
+# Param([int]$vm_count)
+# $vm_count = 5
 
 $clone = "GNS3 VM"
 

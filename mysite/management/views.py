@@ -47,11 +47,20 @@ def manage_vm(request):
     if request.method == 'POST':
         form = CreateVMForm(request.POST)
         if form.is_valid():
-            # form.save()
             print(request.POST)
+            amount = request.POST['vm_amount']
+            print(amount)
+            # clone = subprocess.Popen([
+            #     'powershell.exe',
+            #     'static\\Scripts\\createVM.ps1 -vm_count $amount',
+            # ], stdout=sys.stdout)
+
+            # filename = r'C:\TEMP\test.txt'
+            # filename = 1
             clone = subprocess.Popen([
                 'powershell.exe',
                 'static\\Scripts\\createVM.ps1',
+                '-vm_count', amount,
             ], stdout=sys.stdout)
             print(clone.communicate())
             return redirect('manage_vm')
