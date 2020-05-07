@@ -67,9 +67,9 @@
                                                                                     <tr>
                                                                                         <td>{{ list }}</td>
                                                                                         <td>
-                                                                                            {% comment %} <a href="{% url 'delete' user_id=user.id %}"> {% endcomment %}
+                                                                                            <a href="{% url 'del_vm' vm_name=list %}">
                                                                                                 <div class="btn btn-danger">ลบ</div>
-                                                                                            {% comment %} </a> {% endcomment %}
+                                                                                            </a>
                                                                                         </td>
                                                                                     </tr>
                                                                                 {% endfor %}

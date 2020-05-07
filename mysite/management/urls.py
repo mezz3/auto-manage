@@ -8,4 +8,5 @@ urlpatterns = [
     path('delete_admin/delete/<int:user_id>/', views.delete, name='delete'),
     path('manage_vm/', views.manage_vm, name='manage_vm'),
     path('manage_vm/delete_vm/', views.delete_vm, name='delete_vm'),
+    path('manage_vm/delete_vm/<str:vm_name>', views.del_vm, name='del_vm'),
 ]

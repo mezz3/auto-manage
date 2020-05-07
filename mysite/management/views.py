@@ -77,12 +77,6 @@ def manage_vm(request):
 
 @login_required
 def delete_vm(request):
-    vm_list = subprocess.Popen([
-        'powershell.exe',
-        'static\\Scripts\\getVM.ps1',
-    ], stdout=sys.stdout)
-    print(vm_list)
-
     test = check_output([
         'powershell.exe',
         'static\\Scripts\\getVM.ps1',
@@ -106,3 +100,13 @@ def delete_vm(request):
     # print(vm.sys.stdout)
     # vm_list = vm.communicate()
     return render(request, 'delete_vm.html', {'list_test': list_test})
+
+
+def del_vm(request, vm_name):
+    delete = check_output([
+        'powershell.exe',
+        'static\\Scripts\\deleteVM.ps1',
+        '-vm_name', vm_name,
+    ])
+    print(vm_name)
+    return redirect('delete_vm')
