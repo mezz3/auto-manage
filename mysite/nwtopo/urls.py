@@ -5,5 +5,6 @@ from . import views
 urlpatterns = [
     path('', views.nwtopo, name='nwtopo'),
     path('topo_nw/', views.topo, name='topo_nw'),
-    path('nwtopo/create/', views.create, name='create'),
+    path('deploy/', views.deploy, name='deploy'),
+    path('ip_report/', views.report, name='report'),
 ]

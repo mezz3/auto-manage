@@ -56,13 +56,6 @@ def manage_vm(request):
             print(request.POST)
             amount = request.POST['vm_amount']
             print(amount)
-            # clone = subprocess.Popen([
-            #     'powershell.exe',
-            #     'static\\Scripts\\createVM.ps1 -vm_count $amount',
-            # ], stdout=sys.stdout)
-
-            # filename = r'C:\TEMP\test.txt'
-            # filename = 1
             clone = subprocess.Popen([
                 'powershell.exe',
                 'static\\Scripts\\createVM.ps1',

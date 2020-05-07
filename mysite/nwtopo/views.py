@@ -16,6 +16,12 @@ def topo(request):
 
 
 @login_required
-def create(request):
+def deploy(request):
     form = CreateTempForm(request.POST)
-    return render(request, 'create.html', {'form': form})
+    return render(request, 'deploy.html', {'form': form})
+
+
+@login_required
+def report(request):
+    # form = CreateTempForm(request.POST)
+    return render(request, 'ip_report.html')
