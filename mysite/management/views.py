@@ -50,16 +50,39 @@ def delete(request, user_id):
 
 @login_required
 def manage_vm(request):
+    lastest = check_output([
+        'powershell.exe',
+        'static\\Scripts\\getVM.ps1',
+    ])
+    name_list = []
+    keep = lastest.split()
+
+    name_test = []
+    list_test = []
+    count = 1
+    for _ in keep:
+        name_test.append(_.decode('utf8'))
+    for arg in name_test:
+        if 'gns3vm-' in arg:
+            list_test.append(arg)
+            count += 1
+    print(name_test)
+    print(list_test)
+    print(count)
+
     if request.method == 'POST':
         form = CreateVMForm(request.POST)
         if form.is_valid():
             print(request.POST)
             amount = request.POST['vm_amount']
             print(amount)
+            print(count)
+
             clone = subprocess.Popen([
                 'powershell.exe',
                 'static\\Scripts\\createVM.ps1',
                 '-vm_count', amount,
+                '-count', str(count),
             ], stdout=sys.stdout)
             print(clone.communicate())
             return redirect('manage_vm')
@@ -88,8 +111,8 @@ def delete_vm(request):
     print(name_test)
     print(list_test)
     print('___________________')
-    print(name_list)
-    print(keep)
+    # print(name_list)
+    # print(keep)
     # print(vm.sys.stdout)
     # vm_list = vm.communicate()
     return render(request, 'delete_vm.html', {'list_test': list_test})
