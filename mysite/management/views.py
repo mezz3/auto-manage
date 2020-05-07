@@ -1,12 +1,17 @@
-from django.shortcuts import render, HttpResponseRedirect, redirect
+import subprocess
+import sys
+from subprocess import check_output
+from uu import decode
+
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.db.models.deletion import SET_DEFAULT
-import subprocess, sys, Scripts
-from subprocess import check_output
+from django.shortcuts import HttpResponseRedirect, redirect, render
 
+import Scripts
 from management.forms import AddadminForm, AdminSearchForm, CreateVMForm
+
 
 # Create your views here.
 @login_required
@@ -82,7 +87,22 @@ def delete_vm(request):
         'powershell.exe',
         'static\\Scripts\\getVM.ps1',
     ])
-    print(test)
+    name_list = []
+    keep = test.split()
+
+    name_test = []
+    list_test = []
+    for _ in keep:
+        name_test.append(_.decode('utf8'))
+    for arg in name_test:
+        if 'gns3vm-' in arg:
+            list_test.append(arg)
+
+    print(name_test)
+    print(list_test)
+    print('___________________')
+    print(name_list)
+    print(keep)
     # print(vm.sys.stdout)
     # vm_list = vm.communicate()
-    return render(request, 'delete_vm.html', {'test': test})
+    return render(request, 'delete_vm.html', {'list_test': list_test})
