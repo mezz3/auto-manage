@@ -1,10 +1,15 @@
-from django.shortcuts import render, redirect
-from django.contrib.auth.decorators import login_required
 import subprocess
 import sys
+from os import path
+from os.path import split
 from subprocess import check_output
 
-from nwtopo.forms import CreateForm, CreateTempForm
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import redirect, render
+
+from nwtopo.forms import CreateForm, TemplateForm
+from nwtopo.models import Template
+
 
 # Create your views here.
 @login_required
@@ -20,41 +25,28 @@ def topo(request):
 
 @login_required
 def deploy(request):
-    # form = CreateTempForm(request.POST, request.FILES)
-    # if request.method == 'POST':
-    #     if form.is_valid():
-    #         form = CreateTempForm(request.POST)
-    #         print(request.POST)
-    #         # print(request.FILES)
-    #         # amount = request.POST['vm_amount']
-    #         # print(amount)
-    #         # print(count)
-
-    #         # clone = subprocess.Popen([
-    #         #     'powershell.exe',
-    #         #     'static\\Scripts\\createVM.ps1',
-    #         #     '-vm_count', amount,
-    #         #     '-count', str(count),
-    #         # ], stdout=sys.stdout)
-    #         # print(clone.communicate())
-    #         return redirect('deploy')
-    # else:
-    #     form = CreateTempForm()
     if request.method == 'POST':
-        form = CreateTempForm(request.POST, request.FILES)
+        form = TemplateForm(request.POST, request.FILES)
         if form.is_valid():
+            # print(request.POST)
             print(request.POST)
-            print(request.FILES)
-            # form.save()
+            path_file = request.FILES
+            print(path_file)
+            name_path = path_file['temp_file']
+            Template.objects.create(
+                title=form.cleaned_data['title'],
+                temp_file=form.cleaned_data['temp_file'],
+                temp_amount=form.cleaned_data['temp_amount'],
+            )
             test = check_output([
                 'python.exe',
                 'static\\Scripts\\sendfile.py',
+                str(name_path),
             ])
-            # script = 
 
-            return redirect('deploy')
+            return redirect('report')
     else:
-        form = CreateTempForm()
+        form = TemplateForm()
     return render(request, 'deploy.html', {'form': form})
 
 

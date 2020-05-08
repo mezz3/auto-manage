@@ -1,13 +1,20 @@
 # import json
+import sys
+from os.path import exists
+import os
+
 import paramiko
-# from math import floor
-# from lxml import etree
 from jinja2 import Environment, FileSystemLoader
 
+name_path = sys.argv[1:]
+# if name_path:
+#     name = name_path[0]
 
+# print(name_path[0])
+# print('test')
 # upload .unl file to Web EVE-NG
-source = r'C:/Users/user/Desktop/ning 23-30.unl'
-dest = r'/opt/unetlab/labs/ning 23-30.unl'
+source = r'C:/Users/user/Desktop/auto-manage/mysite/media/template/file/'+name_path[0]
+dest = r'/opt/unetlab/labs/'+name_path[0]
 hostname = '192.168.81.128'
 port = 22 # default port for SSH
 username = 'root'
