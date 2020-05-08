@@ -17,7 +17,7 @@ def topo(request):
 
 @login_required
 def deploy(request):
-    form = CreateTempForm(request.POST)
+    form = CreateTempForm(request.POST, request.FILES)
     return render(request, 'deploy.html', {'form': form})
 
 
