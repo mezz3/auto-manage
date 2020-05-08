@@ -34,7 +34,7 @@
                                                             <div class="vc_panel-body">
                                                                 <div class="vc_border">
                                                                     <div class="from-group container">
-                                                                        <form method='POST' action="#">
+                                                                        <form method='POST' action="{% url 'deploy' %}"  enctype='multipart/form-data'>
                                                                         {% csrf_token %}
                                                                             {{ form }}
                                                                         {% comment %} {% for field in form %}
