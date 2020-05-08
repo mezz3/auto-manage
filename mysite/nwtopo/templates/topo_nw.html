@@ -8,6 +8,41 @@
 		<link rel="stylesheet" href="{% static 'asset\main.css' %}" />
 		<link rel="stylesheet" href="{% static 'asset\base.css' %}" />
         <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.9.0/css/all.css">
+
+		<style>
+		#dragthis{
+			width:50px;
+			height:50px;
+			background: green;
+		}
+		#draghere{
+			margin-top: 80px;
+			width:200px;
+			height:600px;
+			right: 10px;
+			top: 10px;
+			text-align: center;
+			position: absolute
+		}
+		</style>
+		<script type='text/javascript'>
+		function drag(e)
+		{
+			e.dataTransfer.setData('anything', e.target.id);
+		};
+
+		function allowdrop(e)
+		{
+			e.preventDefault();
+		};
+
+		function drop(e)
+		{
+			var data = e.dataTransfer.getData('anything');
+			e.target.appendChild(document.getElementById(data));
+		};
+		</script>
 	</head>
     <div class="w3-top">
   <div class="w3-bar w3-white w3-wide w3-padding w3-card">
@@ -27,31 +62,31 @@
 							<ul>
 							<br><br><br><br>
 							<li style="margin-right: 20px;"><h6>Network device<h6></li>
-								<li style="margin-right: 50%; margin-left: 20%;">
-									<a href="#" id="top-link">
-										<span class="icon solid fa-home">
-											<img src="{% static 'img\router.png' %}" alt="" style="width:45px; height:45px;" />
-										</span>
-									</a>
+								<li style="margin-right: 50%; margin-left: 20%;" draggable='true' ondragstart='drag(event)'>
+									{% comment %} <a href="#" id="top-link"> {% endcomment %}
+										{% comment %} <span class="icon solid fa-home" draggable='true' ondragstart='drag(event)'> {% endcomment %}
+											<img src="{% static 'img\router.png' %}" alt="" style="width:45px; height:45px;" draggable='true' ondragstart='drag(event)'/>
+										{% comment %} </span> {% endcomment %}
+									{% comment %} </a> {% endcomment %}
 								</li>
 							<br>
 								<li style="margin-right: 50%; margin-left: 20%;">
-									<a href="#" id="portfolio-link">
-										<span class="icon solid fa-sw">
+									{% comment %} <a href="#" id="portfolio-link">
+										<span class="icon solid fa-sw"> {% endcomment %}
 											<img src="{% static 'img\sw.png' %}" alt="" style="width:45px; height:45px;" />
-										</span>
-									</a>
+										{% comment %} </span>
+									</a> {% endcomment %}
 								</li>
 							<br>
 								<li style="margin-right: 50%; margin-left: 20%;">
-									<a href="#" id="about-link">
-										<span class="icon solid fa-com">
+									{% comment %} <a href="#" id="about-link">
+										<span class="icon solid fa-com"> {% endcomment %}
 											<img src="{% static 'img\pc.png' %}" alt="" style="width:45px; height:45px;" />
-										</span>
-									</a>
+										{% comment %} </span>
+									</a> {% endcomment %}
 								</li>
 							<br>
-							<li style="margin-right: 90px;"><h6>Other<h6></li>
+							{% comment %} <li style="margin-right: 90px;"><h6>Other<h6></li>
 								<li style="margin-right: 50%; margin-left: 20%;">
 									<a href="#" id="contact-link">
 										<span class="icon solid fa-text">
@@ -74,7 +109,7 @@
 											<img src="{% static 'img\square.png' %}" alt="" style="width:43px; height:43px;" />
 										</span>
 									</a>
-								</li>
+								</li> {% endcomment %}
 							</ul>
 						</nav>
 
@@ -87,16 +122,24 @@
 				<!-- main topo -->
 					<section id="top">
 						<div class="container">
-							
+							{% comment %} <div id='draghere' ondragover="allowdrop(event)" ondrop="drop(event)">drag here</div> {% endcomment %}
+
 						</div>
 					</section>
+
+			<div id='dragthis' draggable='true' ondragstart='drag(event)'></div>
+			<div id='dragthis' style='background: red !important;' draggable='true' ondragstart='drag(event)'></div>
+			<div id='dragthis' style='background: black !important;' draggable='true' ondragstart='drag(event)'></div>
+			<div id='draghere' ondragover="allowdrop(event)" ondrop="drop(event)">drag here</div>
 			</div>
+			
 
 			<div id='header' style='width: 80px !important; height: 40px; margin-top: 43%; margin-left: 93%; background: none !important;'>
 				<div class="btn btn-primary" id="sub_id">
 					SAVE
 				</div>
 			</div>
+			
 
 	</body>
 </html>

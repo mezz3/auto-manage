@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'management',
     'vmtopo',
     'nwtopo',
+    'jquery',
 ]
 
 MIDDLEWARE = [
