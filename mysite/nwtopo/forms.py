@@ -10,7 +10,6 @@ TEMP_CHOICES =(
 
 class CreateForm(forms.Form):
     temp_name = forms.CharField(max_length=255, required=False, label='Template name')
-    # temp_description = forms.CharField(max_length=255, required=False, label='Template description')
 
     temp_name.widget.attrs.update({'class': 'form-control'})
 
@@ -19,6 +18,7 @@ class CreateForm(forms.Form):
         if temp_name == None:
             raise  forms.ValidationError("ยังไม่ได้ทำการระบุชื่อ")
         return temp_name
+
 
 class TemplateForm(forms.Form):
     title = forms.ChoiceField(required=False, choices = TEMP_CHOICES, label='Template ที่ต้องการสร้าง')

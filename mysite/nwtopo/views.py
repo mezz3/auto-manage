@@ -8,22 +8,23 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect, render
 
 from nwtopo.forms import CreateForm, TemplateForm
-from nwtopo.models import Template
+from nwtopo.models import Template, Deploy
 
 
 # Create your views here.
 @login_required
 def nwtopo(request):
-    print("456")
     if request.method == 'POST':
-        print("4567")
         form = CreateForm(request.POST)
         if form.is_valid():
-            print("valid")
+            print(request.POST)
+            print(request.POST['temp_name'])
+
+            temp_name = request.POST['temp_name']
             test = check_output([
                 'python.exe',
                 'static\\Scripts\\createfile.py',
-                # str(name_path),
+                str(temp_name),
             ])
             return redirect('nwtopo')
     else:
