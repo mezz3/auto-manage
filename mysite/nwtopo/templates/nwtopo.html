@@ -118,8 +118,8 @@ data-ad-slot='5323679646'></ins>
         </div>
         {% comment %} pop-up {% endcomment %}
         <div id='modal-wrapper' class='modal'>
-            <form method='' class='modal-content animate' action='/action_page.php'>
-
+            <form method='POST' class='modal-content animate' action="{% url 'nwtopo' %}" enctype='multipart/form-data'>
+            {% csrf_token %}
                 <div class='imgcontainer'>
                     <span onclick="document.getElementById('modal-wrapper').style.display='none'" class='close' title='Close PopUp'>&times;</span>
                     <h1 style='text-align: center'>Create Template</h1>
@@ -127,12 +127,12 @@ data-ad-slot='5323679646'></ins>
 
                 <div class='container'>
                     {{ form }}
-                    <div>
-                        <a href="{% url 'topo_nw' %}">
-                        <br>
-                            <div class="btn btn-primary" style='float: right; margin-top: 3%'>Create</div>
-                        </a>
-                    </div>
+                    {% comment %} <div> {% endcomment %}
+                        {% comment %} <a href="{% url 'topo_nw' %}"> {% endcomment %}
+                    <br>
+                        <button class="btn btn-primary" style='float: right; margin-top: 3%' type="submit">Create</button>
+                        {% comment %} </a> {% endcomment %}
+                    {% comment %} </div> {% endcomment %}
                 </div>
             </form>
         </div>

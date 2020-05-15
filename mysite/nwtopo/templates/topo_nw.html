@@ -10,7 +10,7 @@
         <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.9.0/css/all.css">
 
-		<style>
+		{% comment %} <style>
 		#dragthis{
 			width:50px;
 			height:50px;
@@ -41,8 +41,8 @@
 		{
 			var data = e.dataTransfer.getData('anything');
 			e.target.appendChild(document.getElementById(data));
-		};
-		</script>
+		}; {% endcomment %}
+		{% comment %} </script> {% endcomment %}
 	</head>
     <div class="w3-top">
   <div class="w3-bar w3-white w3-wide w3-padding w3-card">
@@ -62,7 +62,7 @@
 							<ul>
 							<br><br><br><br>
 							<li style="margin-right: 20px;"><h6>Network device<h6></li>
-								<li style="margin-right: 50%; margin-left: 20%;">
+								<li style="margin-right: 35%;">
 									{% comment %} <a href="#" id="top-link"> {% endcomment %}
 										{% comment %} <span class="icon solid fa-home" draggable='true' ondragstart='drag(event)'> {% endcomment %}
 											<img src="{% static 'img\router.png' %}" alt="" style="width:45px; height:45px;" draggable='true' ondragstart='drag(event)'/>
@@ -70,7 +70,7 @@
 									{% comment %} </a> {% endcomment %}
 								</li>
 							<br>
-								<li style="margin-right: 50%; margin-left: 20%;">
+								<li style="margin-right: 35%;">
 									{% comment %} <a href="#" id="portfolio-link">
 										<span class="icon solid fa-sw"> {% endcomment %}
 											<img src="{% static 'img\sw.png' %}" alt="" style="width:45px; height:45px;" />
@@ -78,7 +78,7 @@
 									</a> {% endcomment %}
 								</li>
 							<br>
-								<li style="margin-right: 50%; margin-left: 20%;">
+								<li style="margin-right: 35%;">
 									{% comment %} <a href="#" id="about-link">
 										<span class="icon solid fa-com"> {% endcomment %}
 											<img src="{% static 'img\pc.png' %}" alt="" style="width:45px; height:45px;" />
@@ -86,6 +86,21 @@
 									</a> {% endcomment %}
 								</li>
 							<br>
+							<li style="margin-right: 29%; margin-top: 160%; margin-bottom: 5%;">
+									{% comment %} <a href="#" id="about-link"> {% endcomment %}
+										{% comment %} <span class="icon solid fad fa-save"> {% endcomment %}
+											<img src="{% static 'img\save.png' %}" alt="" style="width:65px; height:45px;" />
+										{% comment %} </span> {% endcomment %}
+									{% comment %} </a> {% endcomment %}
+							</li>
+							<br>
+							<li style="margin-right: 33%;">
+									{% comment %} <a href="#" id="about-link"> {% endcomment %}
+										{% comment %} <span class="icon solid fad fa-save"> {% endcomment %}
+											<img src="{% static 'img\exit.png' %}" alt="" style="width:60px; height:45px;" />
+										{% comment %} </span> {% endcomment %}
+									{% comment %} </a> {% endcomment %}
+							</li>
 							{% comment %} <li style="margin-right: 90px;"><h6>Other<h6></li>
 								<li style="margin-right: 50%; margin-left: 20%;">
 									<a href="#" id="contact-link">
@@ -127,18 +142,18 @@
 						</div>
 					</section>
 
-			<div id='dragthis' draggable='true' ondragstart='drag(event)'></div>
+			{% comment %} <div id='dragthis' draggable='true' ondragstart='drag(event)'></div>
 			<div id='dragthis' style='background: red !important;' draggable='true' ondragstart='drag(event)'></div>
 			<div id='dragthis' style='background: black !important;' draggable='true' ondragstart='drag(event)'></div>
 			<div id='draghere' ondragover="allowdrop(event)" ondrop="drop(event)">drag here</div>
-			</div>
+			</div> {% endcomment %}
 			
 
-			<div id='header' style='width: 80px !important; height: 40px; margin-top: 43%; margin-left: 93%; background: none !important;'>
+			{% comment %} <div id='header' style='width: 80px !important; height: 40px; margin-top: 43%; margin-left: 93%; background: none !important;'>
 				<div class="btn btn-primary" id="sub_id">
 					SAVE
 				</div>
-			</div>
+			</div> {% endcomment %}
 			
 
 	</body>

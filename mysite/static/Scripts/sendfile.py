@@ -1,4 +1,3 @@
-# import json
 import sys
 from os.path import exists
 import os
@@ -12,13 +11,15 @@ name_path = sys.argv[1:]
 
 # print(name_path[0])
 # print('test')
+
 # upload .unl file to Web EVE-NG
 source = r'C:/Users/user/Desktop/auto-manage/mysite/media/template/file/'+name_path[0]
-dest = r'/opt/unetlab/labs/'+name_path[0]
-hostname = '192.168.81.128'
+# dest = r'/opt/unetlab/labs/'+name_path[0]
+dest = r'/opt/gns3/projects/'+name_path[0]
+hostname = '192.168.234.128'
 port = 22 # default port for SSH
-username = 'root'
-password = 'eve'
+username = 'gns3'
+password = 'gns3'
 
 try:
     t = paramiko.Transport((hostname, port))

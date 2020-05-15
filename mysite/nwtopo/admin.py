@@ -4,7 +4,7 @@ from nwtopo.models import Template
 
 
 class TemplateAdmin(admin.ModelAdmin):
-    list_display = ['id', 'title', 'temp_file', 'temp_amount']
+    list_display = ['id', 'title', 'temp_amount']
 
 
 admin.site.register(Template, TemplateAdmin)
