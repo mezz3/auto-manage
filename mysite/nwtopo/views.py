@@ -105,30 +105,40 @@ def topo(request):
 
 @login_required
 def deploy(request):
+    template_list = Template.objects.all()
+    clone_list = Clone.objects.all()
+    keep = []
+    for i in clone_list:
+        arg = i.name_clone
+        keep.append(arg)
+
+    return render(request, 'deploy.html', {'template_list': template_list, 'keep': keep})
+
+
+@login_required
+def deploy_temp(request, temp_name):
+    print(temp_name)
+    print('--------------------')
     if request.method == 'POST':
         form = TemplateForm(request.POST)
         if form.is_valid():
             print(request.POST)
-            dic_data = request.POST
-            amount = dic_data['temp_amount']
-            name = dic_data['title']
-            print(amount, name)
-            print(type(amount))
+            print(request.POST['temp_name'])
 
-            path_file = request.FILES
-            print(path_file)
+            # temp_name = request.POST['temp_name']
+            # test = check_output([
+            #     'python.exe',
+            #     'static\\Scripts\\createfile.py',
+            #     str(temp_name),
+            # ])
 
-            name_path = path_file['temp_file']
-            Deploy.objects.create(
-                title=form.cleaned_data['title'],
-                # temp_file=form.cleaned_data['temp_file'],
-                temp_amount=form.cleaned_data['temp_amount'],
-            )
-
+            # Template.objects.create(
+            #     temp_name=form.cleaned_data['temp_name']
+            # )
             return redirect('report')
     else:
         form = TemplateForm()
-    return render(request, 'deploy.html', {'form': form})
+    return render(request, 'deploy_temp.html', {'form': form})
 
 
 @login_required

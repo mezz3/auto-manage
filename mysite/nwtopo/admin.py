@@ -6,7 +6,7 @@ class TemplateAdmin(admin.ModelAdmin):
     list_display = ['id', 'temp_name']
 
 class DeployAdmin(admin.ModelAdmin):
-    list_display = ['id', 'title', 'temp_amount']
+    list_display = ['id', 'temp_amount']
 
 class CloneAdmin(admin.ModelAdmin):
     list_display = ['id', 'name_clone']

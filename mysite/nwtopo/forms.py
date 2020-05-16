@@ -2,10 +2,10 @@ from django import forms
 from pkg_resources import require
 from django.core.exceptions import ValidationError
 
-TEMP_CHOICES =( 
-    ("1", "Vlan test"), 
-    ("2", "Inter VLAN"),
-)
+# TEMP_CHOICES =( 
+#     ("1", "Vlan test"), 
+#     ("2", "Inter VLAN"),
+# )
 
 
 class CreateForm(forms.Form):
@@ -21,12 +21,11 @@ class CreateForm(forms.Form):
 
 
 class TemplateForm(forms.Form):
-    title = forms.ChoiceField(required=False, choices = TEMP_CHOICES, label='Template ที่ต้องการสร้าง')
-    # title = forms.CharField(required=False, label='ชื่อ Template ที่ต้องการสร้าง')
+    # title = forms.ChoiceField(required=False, choices=TEMP_CHOICES, label='Template ที่ต้องการสร้าง')
     # temp_file = forms.FileField(required=False, label='Template File')
     temp_amount = forms.IntegerField(label='จำนวนที่ต้องการสร้าง', required=False)
 
-    title.widget.attrs.update({'class': 'form-control'})
+    # title.widget.attrs.update({'class': 'form-control'})
     temp_amount.widget.attrs.update({'class': 'form-control'})
 
     def clean_temp_amount(self):
