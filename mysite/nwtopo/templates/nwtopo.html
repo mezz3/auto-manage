@@ -161,9 +161,13 @@ data-ad-slot='5323679646'></ins>
                         </a>
                     </td>
                     <td>
-                        <a href="#">
+                    {% comment %} {% for clone in clone_list %} {% endcomment %}
+                    {% if temp.temp_name not in keep %}
+                        <a href="{% url 'temp_clone' temp_name=temp.temp_name %}">
                             <div class="btn btn-primary">Clone</div>
                         </a>
+                    {% endif %}
+                    {% comment %} {% endfor %} {% endcomment %}
                     </td>
                     <td>
                         <a href="{% url 'temp_del' temp_id=temp.id temp_name=temp.temp_name %}">
@@ -172,24 +176,6 @@ data-ad-slot='5323679646'></ins>
                     </td>
                 </tr>
                 {% endfor %}
-                {% comment %} <tr>
-                    <td>test</td>
-                    <td>
-                        <a href="{% url 'topo_nw' %}">
-                            <div class="btn btn-warning" id="id">View Topo</div>
-                        </a>
-                    </td>
-                    <td>
-                        <a href="#">
-                            <div class="btn btn-primary" id="sub_id">Clone</div>
-                        </a>
-                    </td>
-                    <td>
-                        <a href="#">
-                            <div class="btn btn-danger" id="sub_id">Delete</div>
-                        </a>
-                    </td>
-                </tr> {% endcomment %}
             </tbody>
 
         </table>

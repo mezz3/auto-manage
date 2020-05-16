@@ -8,12 +8,20 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect, render
 
 from nwtopo.forms import CreateForm, TemplateForm
-from nwtopo.models import Template, Deploy
+from nwtopo.models import Clone, Deploy, Template
 
 
 # Create your views here.
 @login_required
 def nwtopo(request):
+    template_list = Template.objects.all()
+    clone_list = Clone.objects.all()
+    keep = []
+    for i in clone_list:
+        arg = i.name_clone
+        keep.append(arg)
+    print(keep)
+
     if request.method == 'POST':
         form = CreateForm(request.POST)
         if form.is_valid():
@@ -33,10 +41,8 @@ def nwtopo(request):
             return redirect('nwtopo')
     else:
         form = CreateForm()
-    
-    template_list = Template.objects.all()
 
-    return render(request, 'nwtopo.html', {'form': form, 'template_list': template_list})
+    return render(request, 'nwtopo.html', {'form': form, 'template_list': template_list, 'keep': keep})
 
 
 @login_required
@@ -50,11 +56,45 @@ def temp_del(request, temp_id, temp_name):
     temp = Template.objects.get(pk=temp_id)
     temp.delete()
 
+    name_clone = temp_name
+    clone = Clone.objects.filter(name_clone=temp_name)
+    clone.delete()
+
     return redirect('nwtopo')
 
 
 @login_required
-def temp_clone(request):
+def temp_clone(request, temp_name):
+    clone = check_output([
+        'python.exe',
+        'static\\Scripts\\clone_file.py',
+        str(temp_name),
+    ])
+
+    clone_list = Clone.objects.all()
+    all_clone = []
+    count = 0
+    for i in clone_list:
+        arg = i.name_clone
+        all_clone.append(arg)
+        count += 1
+
+    # count = 1
+    if count == 0:
+        Template.objects.create(
+            temp_name=temp_name + "-" + str(1)
+        )
+        Clone.objects.create(
+            name_clone=temp_name + "-" + str(1)
+        )
+    else:
+        Template.objects.create(
+            temp_name=temp_name + "-" + str(count+1)
+        )
+        Clone.objects.create(
+            name_clone=temp_name + "-" + str(count+1)
+        )
+
     return redirect('nwtopo')
 
 
@@ -68,7 +108,6 @@ def deploy(request):
     if request.method == 'POST':
         form = TemplateForm(request.POST)
         if form.is_valid():
-            # print(request.POST)
             print(request.POST)
             dic_data = request.POST
             amount = dic_data['temp_amount']
@@ -85,11 +124,6 @@ def deploy(request):
                 # temp_file=form.cleaned_data['temp_file'],
                 temp_amount=form.cleaned_data['temp_amount'],
             )
-            # test = check_output([
-            #     'python.exe',
-            #     'static\\Scripts\\sendfile.py',
-            #     str(name_path),
-            # ])
 
             return redirect('report')
     else:
@@ -99,5 +133,4 @@ def deploy(request):
 
 @login_required
 def report(request):
-    # form = CreateTempForm(request.POST)
     return render(request, 'ip_report.html')

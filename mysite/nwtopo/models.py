@@ -14,3 +14,8 @@ class Deploy(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class Clone(models.Model):
+    # temp_name = models.ForeignKey(Template, on_delete=models.PROTECT)
+    name_clone = models.CharField(max_length=100, null=True)
