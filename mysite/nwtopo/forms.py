@@ -9,13 +9,13 @@ TEMP_CHOICES =(
 
 
 class CreateForm(forms.Form):
-    temp_name = forms.CharField(max_length=255, required=False, label='Template name')
+    temp_name = forms.CharField(max_length=100, required=True, label='Template name')
 
     temp_name.widget.attrs.update({'class': 'form-control'})
 
     def clean_temp_name(self):
         temp_name = self.cleaned_data['temp_name']
-        if temp_name == None:
+        if temp_name == None or temp_name == '':
             raise  forms.ValidationError("ยังไม่ได้ทำการระบุชื่อ")
         return temp_name
 
@@ -26,9 +26,7 @@ class TemplateForm(forms.Form):
     # temp_file = forms.FileField(required=False, label='Template File')
     temp_amount = forms.IntegerField(label='จำนวนที่ต้องการสร้าง', required=False)
 
-    # temp.widget.attrs.update({'class': 'form-control'})
     title.widget.attrs.update({'class': 'form-control'})
-    # temp_file.widget.attrs.update({'class': 'form-control'})
     temp_amount.widget.attrs.update({'class': 'form-control'})
 
     def clean_temp_amount(self):

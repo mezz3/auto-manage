@@ -26,11 +26,36 @@ def nwtopo(request):
                 'static\\Scripts\\createfile.py',
                 str(temp_name),
             ])
+
+            Template.objects.create(
+                temp_name=form.cleaned_data['temp_name']
+            )
             return redirect('nwtopo')
     else:
         form = CreateForm()
+    
+    template_list = Template.objects.all()
 
-    return render(request, 'nwtopo.html', {'form': form})
+    return render(request, 'nwtopo.html', {'form': form, 'template_list': template_list})
+
+
+@login_required
+def temp_del(request, temp_name):
+    # temp_delete = check_output([
+    #     'python.exe',
+    #     'static\\Scripts\\delete_temp.py',
+    #     str(temp_name),
+    # ])
+
+    temp = Template.objects.get(pk=temp_name)
+    temp.delete()
+
+    return redirect('nwtopo')
+
+
+@login_required
+def temp_clone(request):
+    return redirect('nwtopo')
 
 
 @login_required
@@ -55,7 +80,7 @@ def deploy(request):
             print(path_file)
 
             name_path = path_file['temp_file']
-            Template.objects.create(
+            Deploy.objects.create(
                 title=form.cleaned_data['title'],
                 # temp_file=form.cleaned_data['temp_file'],
                 temp_amount=form.cleaned_data['temp_amount'],
