@@ -6,7 +6,7 @@ from . import views
 
 urlpatterns = [
     path('', views.nwtopo, name='nwtopo'),
-    path('temp_del/<str:temp_name>', views.temp_del, name='temp_del'),
+    path('temp_del/<int:temp_id>/<str:temp_name>', views.temp_del, name='temp_del'),
     path('temp_clone/', views.temp_clone, name='temp_clone'),
     path('topo_nw/', views.topo, name='topo_nw'),
     path('deploy/', views.deploy, name='deploy'),

@@ -40,14 +40,14 @@ def nwtopo(request):
 
 
 @login_required
-def temp_del(request, temp_name):
-    # temp_delete = check_output([
-    #     'python.exe',
-    #     'static\\Scripts\\delete_temp.py',
-    #     str(temp_name),
-    # ])
+def temp_del(request, temp_id, temp_name):
+    temp_delete = check_output([
+        'python.exe',
+        'static\\Scripts\\delete_temp.py',
+        str(temp_name),
+    ])
 
-    temp = Template.objects.get(pk=temp_name)
+    temp = Template.objects.get(pk=temp_id)
     temp.delete()
 
     return redirect('nwtopo')
