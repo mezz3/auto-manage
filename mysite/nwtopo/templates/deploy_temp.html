@@ -17,16 +17,11 @@
                                     <div class="wpb_wrap">
                                         <div class="vc_contain" data-vc-action="collapse">
                                             <div class="vc vc_general vc_spacing vc_color">
-                                                {% comment %} <div class="vc_tab-contain" style='position: static !important;'>
+                                                <div class="vc_tab-contain">
                                                     <ul class="vc_tab-list">
-                                                        <li class="vc_tab vc_active" style="background: #fff; position: sticky !important;" data-vc-tab>
-                                                            <a href="{% url 'deploy' %}" class="vc">
-                                                                <span class="vc_title-text">Deploy Template</span>
-                                                            </a>
-                                                        </li>
                                                     </ul>
                                                 </div>
-                                                         {% endcomment %}
+                                                        
 
                                                 <div class="vc_panel-contain">
                                                     <div class="vc_panels">
@@ -34,23 +29,30 @@
                                                             <div class="vc_panel-body">
                                                                 <div class="vc_border">
                                                                     <div class="from-group container">
-                                                                        <div id='modal-wrapper' class='modal'>
-            {% comment %} <form method='POST' class='modal-content animate' action="{% url 'deploy_temp' %}" enctype='multipart/form-data'>
-            {% csrf_token %}
+                                                                        <table class="table">
+                                                                            <thead>
+                                                                                <tr>
+                                                                                    <th scope="col">Template Project</th>
+                                                                                    <th scope="col"></th>
+                                                                                </tr>
+                                                                            </thead>
+                                                                            <tbody>
+                                                                            {% for temp in template_list %}
+                                                                                {% if temp.temp_name not in keep %}
+                                                                                <tr>
+                                                                                    <td>{{ temp.temp_name }}</td>
+                                                                                    <td>
+                                                                                        <a href="{% url 'deploy_temp_succ' temp_name=temp.temp_name %}">
+                                                                                            <div class="btn btn-primary" type="submit">Deploy</div>
+                                                                                            {% comment %} <button class="btn btn-primary" style='float: right; margin-top: 3%' type="submit">ยืนยัน</button> {% endcomment %}
+                                                                                        </a>
+                                                                                    </td>
+                                                                                </tr>
+                                                                                {% endif %}
+                                                                            {% endfor %}
+                                                                            </tbody>
 
-                <div class='container'>
-                    {% for field in form %}
-                            <div class="form-group">
-                                <label for="{{field.id_for_label}}">{{field.label}}</label>
-                                    {{field}}
-                                <h6 style='color: red; margin-left: 20px'>{{field.errors}}</h6>
-                            </div>
-                    {% endfor %}
-                    <br>
-                        <button class="btn btn-primary" style='float: right; margin-top: 3%' type="submit">Create</button>
-                </div>
-            </form> {% endcomment %}
-        </div>
+                                                                        </table>
 
                                                                     </div>
                                                         

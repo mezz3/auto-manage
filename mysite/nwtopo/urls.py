@@ -10,7 +10,8 @@ urlpatterns = [
     path('temp_clone/<str:temp_name>', views.temp_clone, name='temp_clone'),
     path('topo_nw/', views.topo, name='topo_nw'),
     path('deploy/', views.deploy, name='deploy'),
-    path('deploy/deploy_temp/<str:temp_name>', views.deploy_temp, name='deploy_temp'),
+    path('deploy/deploy_temp/', views.deploy_temp, name='deploy_temp'),
+    path('deploy/deploy_temp/succ/<str:temp_name>', views.deploy_temp_succ, name='deploy_temp_succ'),
     path('ip_report/', views.report, name='report'),
 ]
 

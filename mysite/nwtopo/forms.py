@@ -26,17 +26,17 @@ class TemplateForm(forms.Form):
     temp_amount = forms.IntegerField(label='จำนวนที่ต้องการสร้าง', required=False)
 
     # title.widget.attrs.update({'class': 'form-control'})
-    temp_amount.widget.attrs.update({'class': 'form-control'})
+    # temp_amount.widget.attrs.update({'class': 'form-control'})
 
-    def clean_temp_amount(self):
-        temp_amount = self.cleaned_data['temp_amount']
-        try:
-            if temp_amount <= 0:
-                raise  forms.ValidationError("จำนวนที่ต้องการ deploy ต้องมากกว่า 0")
-            return temp_amount
-        except TypeError:
-            raise  forms.ValidationError("กรุณาใส่จำนวนที่ต้องการ deploy")
-            return temp_amount
+    # def clean_temp_amount(self):
+    #     temp_amount = self.cleaned_data['temp_amount']
+    #     try:
+    #         if temp_amount <= 0:
+    #             raise  forms.ValidationError("จำนวนที่ต้องการ deploy ต้องมากกว่า 0")
+    #         return temp_amount
+    #     except TypeError:
+    #         raise  forms.ValidationError("กรุณาใส่จำนวนที่ต้องการ deploy")
+    #         return temp_amount
 
     # def clean_temp_file(self):
     #     temp_file = self.cleaned_data['temp_file']
@@ -44,8 +44,8 @@ class TemplateForm(forms.Form):
     #         raise  forms.ValidationError("ยังไม่ได้ทำการเลือกไฟล์")
     #     return temp_file
 
-    def clean_title(self):
-        title = self.cleaned_data['title']
-        if title == None:
-            raise  forms.ValidationError("ยังไม่ได้ทำการระบุชื่อ")
-        return title
+    # def clean_title(self):
+    #     title = self.cleaned_data['title']
+    #     if title == None:
+    #         raise  forms.ValidationError("ยังไม่ได้ทำการระบุชื่อ")
+    #     return title

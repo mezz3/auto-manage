@@ -34,30 +34,12 @@
                                                             <div class="vc_panel-body">
                                                                 <div class="vc_border">
                                                                     <div class="from-group container">
-                                                                        <table class="table">
-                                                                            <thead>
-                                                                                <tr>
-                                                                                    <th scope="col">Template Project</th>
-                                                                                    <th scope="col"></th>
-                                                                                </tr>
-                                                                            </thead>
-
-                                                                            <tbody>
-                                                                            {% for temp in template_list %}
-                                                                                {% if temp.temp_name not in keep %}
-                                                                                <tr>
-                                                                                    <td>{{ temp.temp_name }}</td>
-                                                                                    <td>
-                                                                                        <a href="{% url 'deploy_temp' temp_name=temp.temp_name %}">
-                                                                                            <div class="btn btn-primary">Deploy</div>
-                                                                                        </a>
-                                                                                    </td>
-                                                                                </tr>
-                                                                                {% endif %}
-                                                                            {% endfor %}
-                                                                            </tbody>
-
-                                                                        </table>
+                                                                    <form method='POST' action="{% url 'deploy' %}">
+                                                                    {% csrf_token %}
+                                                                    {{form}}
+                                                                    <button class="btn btn-primary" style='float: right; margin-top: 3%' type="submit">ยืนยัน</button>
+                                                                       
+                                                                        </form>
 
                                                                     </div>
                                                         

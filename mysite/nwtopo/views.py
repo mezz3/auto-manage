@@ -105,40 +105,50 @@ def topo(request):
 
 @login_required
 def deploy(request):
+    if request.method == 'POST':
+        form = TemplateForm(request.POST)
+        if form.is_valid():
+            print(request.POST)
+            print('******')
+
+            Deploy.objects.create(
+                temp_amount=form.cleaned_data['temp_amount']
+            )
+            return redirect('deploy_temp')
+    else:
+        form = TemplateForm()
+
+    return render(request, 'deploy.html', {'form': form})
+
+
+@login_required
+def deploy_temp(request):
     template_list = Template.objects.all()
     clone_list = Clone.objects.all()
     keep = []
     for i in clone_list:
         arg = i.name_clone
         keep.append(arg)
-
-    return render(request, 'deploy.html', {'template_list': template_list, 'keep': keep})
+    return render(request, 'deploy_temp.html', {'template_list': template_list, 'keep': keep})
 
 
 @login_required
-def deploy_temp(request, temp_name):
-    print(temp_name)
+def deploy_temp_succ(request, temp_name):
     print('--------------------')
-    if request.method == 'POST':
-        form = TemplateForm(request.POST)
-        if form.is_valid():
-            print(request.POST)
-            print(request.POST['temp_name'])
+    deploy_list = Deploy.objects.all()
+    lastest = Deploy.objects.latest('id')
+    num = int(lastest.temp_amount)
+    temp_name = temp_name
+    print(type(lastest), lastest.temp_amount, temp_name)
 
-            # temp_name = request.POST['temp_name']
-            # test = check_output([
-            #     'python.exe',
-            #     'static\\Scripts\\createfile.py',
-            #     str(temp_name),
-            # ])
-
-            # Template.objects.create(
-            #     temp_name=form.cleaned_data['temp_name']
-            # )
-            return redirect('report')
-    else:
-        form = TemplateForm()
-    return render(request, 'deploy_temp.html', {'form': form})
+    for i in range(num):
+        print(i)
+        test = check_output([
+            'python.exe',
+            'static\\Scripts\\clone_file.py',
+            str(temp_name),
+        ])
+    return redirect('report')
 
 
 @login_required
