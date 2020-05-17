@@ -34,6 +34,19 @@
                                                             <div class="vc_panel-body">
                                                                 <div class="vc_border">
                                                                     <div class="from-group container">
+                                                                    {% comment %} <form class="form-inline" method="GET" action="{% url 'report' %}">
+                                                                                <h4 style='margin-right:5%'>form.item_name.label</h4>
+                                                                                <div class='row'>
+                                                                                    <div class='col'> {% endcomment %}
+                                                                                        {% comment %} <label for="{{ form.item_name.id_for_label }}"></label> {% endcomment %}
+                                                                                        {% comment %} {{ form.item_name }} {% endcomment %}
+                                                                                        {% comment %} {{ form.errors }} {% endcomment %}
+                                                                                    {% comment %} </div>
+                                                                                    <div class='col'>
+                                                                                        <button type='submit' class='btn btn-primary ml-3'>ค้นหา</button>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </form> {% endcomment %}
                                                                     <table class="table">
                                                                             <thead>
                                                                                 <tr>
@@ -54,19 +67,6 @@
                                                                                 </tr>
                                                                                 {% endif %}
                                                                             {% endfor %}
-
-                                                                            {% comment %} {% for temp in template_list %}
-                                                                                {% if temp.temp_name not in keep %}
-                                                                                <tr>
-                                                                                    <td>{{ temp.temp_name }}</td>
-                                                                                    <td>
-                                                                                        <a href="{% url 'deploy_temp_succ' temp_name=temp.temp_name %}">
-                                                                                            <div class="btn btn-primary" type="submit">Deploy</div>
-                                                                                        </a>
-                                                                                    </td>
-                                                                                </tr>
-                                                                                {% endif %}
-                                                                            {% endfor %} {% endcomment %}
                                                                             </tbody>
 
                                                                         </table>

@@ -8,7 +8,7 @@ from subprocess import check_output
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect, render
 
-from nwtopo.forms import CreateForm, TemplateForm
+from nwtopo.forms import CreateForm, TemplateForm, DeploySearchForm
 from nwtopo.models import Clone, Deploy, Template
 
 
@@ -112,9 +112,9 @@ def deploy(request):
             print(request.POST)
             print('******')
 
-            # Deploy.objects.create(
-            #     temp_amount=form.cleaned_data['temp_amount']
-            # )
+            Deploy.objects.create(
+                temp_amount=form.cleaned_data['temp_amount']
+            )
             return redirect('deploy_temp')
     else:
         form = TemplateForm()
@@ -142,17 +142,23 @@ def deploy_temp_succ(request, temp_name):
     temp_name = temp_name
     print(type(lastest), lastest.temp_amount, temp_name)
 
-    # for i in range(num):
-    #     test = check_output([
-    #         'python.exe',
-    #         'static\\Scripts\\clone_file.py',
-    #         str(temp_name),
-    #     ])
+    for i in range(num):
+        test = check_output([
+            'python.exe',
+            'static\\Scripts\\clone_file.py',
+            str(temp_name),
+        ])
     return redirect('report')
 
 
 @login_required
 def report(request):
+    # form = ItemSearchForm(request.GET)
+    # if form.is_valid():
+    #     item_name = form.cleaned_data['item_name']
+
+    #     item_list = Item.objects.filter(item_name__icontains=item_name)
+        
     template_list = Template.objects.all()
 
     url = 'http://10.0.15.21/v2/projects'
