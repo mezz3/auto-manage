@@ -34,6 +34,43 @@
                                                             <div class="vc_panel-body">
                                                                 <div class="vc_border">
                                                                     <div class="from-group container">
+                                                                    <table class="table">
+                                                                            <thead>
+                                                                                <tr>
+                                                                                    <th scope="col">Deploy Project</th>
+                                                                                    <th scope="col"></th>
+                                                                                </tr>
+                                                                            </thead>
+                                                                            <tbody>
+                                                                            {% for temp in temp_deploy %}
+                                                                                {% if temp not in temp_template %}
+                                                                                <tr>
+                                                                                    <td>{{ temp }}</td>
+                                                                                    <td>
+                                                                                        <a href="{% url 'deploy_del' deploy_name=temp %}">
+                                                                                            <div class="btn btn-danger" type="submit">Delete</div>
+                                                                                        </a>
+                                                                                    </td>
+                                                                                </tr>
+                                                                                {% endif %}
+                                                                            {% endfor %}
+
+                                                                            {% comment %} {% for temp in template_list %}
+                                                                                {% if temp.temp_name not in keep %}
+                                                                                <tr>
+                                                                                    <td>{{ temp.temp_name }}</td>
+                                                                                    <td>
+                                                                                        <a href="{% url 'deploy_temp_succ' temp_name=temp.temp_name %}">
+                                                                                            <div class="btn btn-primary" type="submit">Deploy</div>
+                                                                                        </a>
+                                                                                    </td>
+                                                                                </tr>
+                                                                                {% endif %}
+                                                                            {% endfor %} {% endcomment %}
+                                                                            </tbody>
+
+                                                                        </table>
+
                                                                         <form method='POST' action="#">
                                                                         {% csrf_token %}
                                                                             {% comment %} {{ form }} {% endcomment %}

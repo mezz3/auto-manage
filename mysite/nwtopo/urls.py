@@ -13,6 +13,7 @@ urlpatterns = [
     path('deploy/deploy_temp/', views.deploy_temp, name='deploy_temp'),
     path('deploy/deploy_temp/succ/<str:temp_name>', views.deploy_temp_succ, name='deploy_temp_succ'),
     path('ip_report/', views.report, name='report'),
+    path('ip_report/delete/<str:deploy_name>', views.deploy_del, name='deploy_del'),
 ]
 
 if settings.DEBUG:

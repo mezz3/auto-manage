@@ -2,6 +2,7 @@ import subprocess
 import sys
 from os import path
 from os.path import split
+import requests
 from subprocess import check_output
 
 from django.contrib.auth.decorators import login_required
@@ -111,9 +112,9 @@ def deploy(request):
             print(request.POST)
             print('******')
 
-            Deploy.objects.create(
-                temp_amount=form.cleaned_data['temp_amount']
-            )
+            # Deploy.objects.create(
+            #     temp_amount=form.cleaned_data['temp_amount']
+            # )
             return redirect('deploy_temp')
     else:
         form = TemplateForm()
@@ -141,16 +142,49 @@ def deploy_temp_succ(request, temp_name):
     temp_name = temp_name
     print(type(lastest), lastest.temp_amount, temp_name)
 
-    for i in range(num):
-        print(i)
-        test = check_output([
-            'python.exe',
-            'static\\Scripts\\clone_file.py',
-            str(temp_name),
-        ])
+    # for i in range(num):
+    #     test = check_output([
+    #         'python.exe',
+    #         'static\\Scripts\\clone_file.py',
+    #         str(temp_name),
+    #     ])
     return redirect('report')
 
 
 @login_required
 def report(request):
-    return render(request, 'ip_report.html')
+    template_list = Template.objects.all()
+
+    url = 'http://10.0.15.21/v2/projects'
+    web_data = requests.get(url)
+    text = web_data.json()
+
+    dic = {}
+    for i in text:
+        key = i['name']
+        if key not in dic.keys():
+            dic[key] = i['project_id']
+    temp_deploy = []
+    for i in dic.keys():
+        # print(i)
+        temp_deploy.append(i)
+    # print(dic.keys())
+    print(temp_deploy)
+    temp_template = []
+    for temp in template_list:
+        # print(temp.temp_name)
+        temp_template.append(temp.temp_name)
+    print(temp_template)
+    
+    return render(request, 'ip_report.html', {'temp_template': temp_template, 'temp_deploy': temp_deploy})
+
+
+@login_required
+def deploy_del(request, deploy_name):
+    temp_delete = check_output([
+        'python.exe',
+        'static\\Scripts\\delete_temp.py',
+        str(deploy_name),
+    ])
+
+    return redirect('report')
