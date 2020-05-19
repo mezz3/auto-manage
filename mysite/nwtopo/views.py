@@ -7,6 +7,8 @@ from subprocess import check_output
 
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect, render
+from django.views.generic import RedirectView
+from django.http import HttpResponse, HttpResponseRedirect
 
 from nwtopo.forms import CreateForm, TemplateForm, DeploySearchForm
 from nwtopo.models import Clone, Deploy, Template
@@ -102,6 +104,27 @@ def temp_clone(request, temp_name):
 @login_required
 def topo(request):
     return render(request, 'topo_nw.html')
+
+
+@login_required
+def create_topo(request, temp_name):
+    # scraping data to get id
+    url = 'http://10.0.15.21/v2/projects'
+    web_data = requests.get(url)
+    text = web_data.json()
+
+    dic = {}
+    for i in text:
+        key = i['name']
+        if key not in dic.keys():
+            dic[key] = i['project_id']
+
+    # get id project!
+    name = temp_name
+    temp_id = dic[name]
+    print(temp_id, name)
+
+    return HttpResponseRedirect('http://10.0.15.21/static/web-ui/server/1/project/' + temp_id)
 
 
 @login_required

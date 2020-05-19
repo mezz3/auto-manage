@@ -156,7 +156,8 @@ data-ad-slot='5323679646'></ins>
                 <tr>
                     <td>{{ temp.temp_name }}</td>
                     <td>
-                        <a href="{% url 'remote_admin' %}">
+                        {% comment %} <a href="{% url 'remote_admin' %}"> {% endcomment %}
+                        <a href="{% url 'create_topo' temp_name=temp.temp_name %}">
                             <div class="btn btn-primary">View Topo</div>
                         </a>
                     </td>
