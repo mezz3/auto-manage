@@ -19,11 +19,11 @@ def login(request):
         user = auth.authenticate(username=username, password=password)
         if user is not None:
             auth.login(request, user)
-            handle = subprocess.Popen([
-                'powershell.exe',
-                'static\\Scripts\\login.ps1',
-            ], stdout=sys.stdout)
-            print(handle.communicate())
+            # handle = subprocess.Popen([
+            #     'powershell.exe',
+            #     'static\\Scripts\\login.ps1',
+            # ], stdout=sys.stdout)
+            # print(handle.communicate())
             return redirect('/index')
         else:
             messages.info(request, 'ชื่อผู้ใช้งาน หรือรหัสผิดพลาด')

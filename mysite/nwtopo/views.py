@@ -4,6 +4,8 @@ from os import path
 from os.path import split
 import requests
 from subprocess import check_output
+import gns3fy
+from tabulate import tabulate
 
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect, render
@@ -124,6 +126,8 @@ def create_topo(request, temp_name):
     temp_id = dic[name]
     print(temp_id, name)
 
+
+
     return HttpResponseRedirect('http://10.0.15.21/static/web-ui/server/1/project/' + temp_id)
 
 
@@ -193,19 +197,69 @@ def report(request):
         key = i['name']
         if key not in dic.keys():
             dic[key] = i['project_id']
-    temp_deploy = []
+    keep_deploy = []
     for i in dic.keys():
-        # print(i)
-        temp_deploy.append(i)
-    # print(dic.keys())
-    print(temp_deploy)
+        keep_deploy.append(i)
+    print(keep_deploy)
     temp_template = []
     for temp in template_list:
-        # print(temp.temp_name)
         temp_template.append(temp.temp_name)
     print(temp_template)
+
+    temp_deploy = set(keep_deploy) - set(temp_template)
+    print(temp_deploy)
     
     return render(request, 'ip_report.html', {'temp_template': temp_template, 'temp_deploy': temp_deploy})
+
+
+@login_required
+def create_report(request, temp_name):
+    template_list = Template.objects.all()
+
+    url = 'http://10.0.15.21/v2/projects'
+    web_data = requests.get(url)
+    text = web_data.json()
+
+    dic = {}
+    for i in text:
+        key = i['name']
+        if key not in dic.keys():
+            dic[key] = i['project_id']
+    keep_deploy = []
+    for i in dic.keys():
+        keep_deploy.append(i)
+    print(keep_deploy)
+    temp_template = []
+    for temp in template_list:
+        temp_template.append(temp.temp_name)
+    print(temp_template)
+
+    temp_deploy = set(keep_deploy) - set(temp_template)
+    print(temp_deploy)
+
+    report = []
+    for i in temp_deploy:
+        # print('for:', i)
+        if temp_name in i:
+            # print('if', i)
+            if len(i) <= len(temp_name)+3:
+                report.append(i)
+    print('test***************', report)
+
+    # create report csv
+    for i in report:
+        # gns3_server = gns3fy.Gns3Connector("http://10.0.15.21")
+        # lab = gns3fy.Project(name=i, connector=gns3_server)
+        # nodes_summary = lab.nodes_summary(is_print=False)
+        # print(tabulate(nodes_summary, headers=["Node", "Status", "Console Port", "ID"]))
+        print(i)
+
+    return render(request, 'file_report.html')
+
+
+@login_required
+def file_report(request):
+    return render(request, 'file_report.html')
 
 
 @login_required
