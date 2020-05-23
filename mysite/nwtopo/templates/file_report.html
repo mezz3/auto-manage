@@ -1,12 +1,67 @@
-{% extends "base2.html" %}
-{% block content %}
+<!DOCTYPE html>
 {% load static %}
-<script>
-$("input[type='submit']").click(function() { return false; });
-</script>
-<head>
-    <link rel="stylesheet" href="{% static 'asset\content.css' %}">
-</head>
+<html>
+<title>KMITL Lab Network</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="{% static 'asset\base.css' %}" />
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="{% static 'asset\content.css' %}">
+{% comment %} <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> {% endcomment %}
+<body>
+
+<style>
+.dropbtn {
+  border: none;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: fixed;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {background-color: #ddd;}
+
+.dropdown:hover .dropdown-content {display: block;}
+
+.dropdown:hover .dropbtn {background-color: #3e8e41;}
+</style>
+
+<!-- Navbar (sit on top) -->
+<div class="w3-top">
+  <div class="w3-bar w3-white w3-wide w3-padding w3-card">
+    <a href="{% url 'index' %}" class="w3-bar-item w3-button" style='margin-right: 2%'><b>KMITL Lab Network</b></a>
+    
+    <div class="dropdown" style='float: right; margin-right: 100px'>
+      <button class="dropbtn" style='background-color: white !important; padding: 0px !important; margin: 0px !important'>
+        <img src="{% static 'img\user.png' %}" style='width: 45px; height: 35px'/>
+      </button>
+      <div class="dropdown-content">
+        <a href="{% url 'profile' %}" class="w3-bar-item w3-button"><b>My Profile</b></a>
+        <a href="{% url 'logout' %}" class="w3-bar-item w3-button">Log out</a>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
 <div class="container">
         <br><br>
        <div class="container site-content">
@@ -22,13 +77,13 @@ $("input[type='submit']").click(function() { return false; });
                                             <div class="vc vc_general vc_spacing vc_color">
                                                 <div class="vc_tab-contain">
                                                     <ul class="vc_tab-list">
-                                                        <li class="vc_tab" data-vc-tab>
+                                                        {% comment %} <li class="vc_tab" data-vc-tab>
                                                             <a href="{% url 'report' %}" class="vc">
                                                                 <span class="vc_title-text" style="color: #fff;">IP Report</span>
                                                             </a>
-                                                        </li>
+                                                        </li> {% endcomment %}
                                                         <li class="vc_tab vc_active" style="background: #fff;" data-vc-tab>
-                                                            <a href="{% url 'file_report' %}" class="vc">
+                                                            <a href="#" class="vc">
                                                                 <span class="vc_title-text">File Report</span>
                                                             </a>
                                                         </li>
@@ -43,8 +98,26 @@ $("input[type='submit']").click(function() { return false; });
                                                                 <div class="vc_border">
                                                                     <div class="from-group container">
 
+                                                                        <table class="table">
+                                                                            <thead>
+                                                                                <tr>
+                                                                                    <th scope="col">File</th>
+                                                                                    <th scope="col"></th>
+                                                                                </tr>
+                                                                            </thead>
+                                                                            <tbody>
+                                                                                    <tr>
+                                                                                        <td>report</td>
+                                                                                        <td>
+                                                                                            {% comment %} <a href="{{ context.url }}" class="btn btn-primary btn-sm"> {% endcomment %}
+                                                                                            <a  href="/media/report.csv" class="btn btn-primary btn-sm">
+                                                                                                Download Report
+                                                                                            </a>
+                                                                                        </td>
+                                                                                    </tr>
+                                                                            </tbody>
+                                                                        </table>
 
-                                                                    
                                                                     </div>
                                                         
                                                                 </div>
@@ -67,4 +140,34 @@ $("input[type='submit']").click(function() { return false; });
 
 </div>
 <br><br>
-{% endblock %}
+
+<!-- Footer -->
+<footer class="w3-center w3-black w3-padding-16">
+  <p>Present by PROJECT2</p>
+</footer>
+
+<script>
+/* When the user clicks on the button, 
+toggle between hiding and showing the dropdown content */
+function myFunction() {
+  document.getElementById("myDropdown").classList.toggle("show");
+}
+
+// Close the dropdown if the user clicks outside of it
+window.onclick = function(e) {
+  if (!e.target.matches('.dropbtn')) {
+  var myDropdown = document.getElementById("myDropdown");
+    if (myDropdown.classList.contains('show')) {
+      myDropdown.classList.remove('show');
+    }
+  }
+}
+</script>
+
+</body>
+</html>
+
+
+
+
+

@@ -4,14 +4,15 @@ import sys
 from os import path
 from os.path import split
 from subprocess import check_output
-
+from tabulate import tabulate
 import gns3fy
 import requests
+
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import redirect, render
 from django.views.generic import RedirectView
-from tabulate import tabulate
+from django.core.files.storage import FileSystemStorage
 
 from nwtopo.forms import CreateForm, DeploySearchForm, TemplateForm
 from nwtopo.models import Clone, Deploy, Template
@@ -256,19 +257,16 @@ def create_report(request, temp_name):
             lab = gns3fy.Project(name=i, connector=gns3_server)
             lab.get()
             nodes_summary = lab.nodes_summary(is_print=False)
-            # text = nodes_summary.json()
-            # print(nodes_summary)
             text = str(nodes_summary) + ", " + i
             use = text.split(", ")
-            # print(text.split(", "))
             writer.writerow(use)
-            # print((tabulate(nodes_summary, headers=["Node", "Status", "Console Port", "ID", "Project"])), i)
 
     return render(request, 'file_report.html')
 
 
 @login_required
 def file_report(request):
+    # context = 'media/test.pdf'
     return render(request, 'file_report.html')
 
 
