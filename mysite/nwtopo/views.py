@@ -1,18 +1,19 @@
+import csv
 import subprocess
 import sys
 from os import path
 from os.path import split
-import requests
 from subprocess import check_output
-import gns3fy
-from tabulate import tabulate
 
+import gns3fy
+import requests
 from django.contrib.auth.decorators import login_required
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import redirect, render
 from django.views.generic import RedirectView
-from django.http import HttpResponse, HttpResponseRedirect
+from tabulate import tabulate
 
-from nwtopo.forms import CreateForm, TemplateForm, DeploySearchForm
+from nwtopo.forms import CreateForm, DeploySearchForm, TemplateForm
 from nwtopo.models import Clone, Deploy, Template
 
 
@@ -247,12 +248,21 @@ def create_report(request, temp_name):
     print('test***************', report)
 
     # create report csv
-    for i in report:
-        # gns3_server = gns3fy.Gns3Connector("http://10.0.15.21")
-        # lab = gns3fy.Project(name=i, connector=gns3_server)
-        # nodes_summary = lab.nodes_summary(is_print=False)
-        # print(tabulate(nodes_summary, headers=["Node", "Status", "Console Port", "ID"]))
-        print(i)
+    with open("media/report.csv", "w+") as csvfile:
+        writer = csv.writer(csvfile)
+        writer.writerow(["Node", "Status", "Console Port", "ID", "Project"])
+        for i in report:
+            gns3_server = gns3fy.Gns3Connector("http://10.0.15.21")
+            lab = gns3fy.Project(name=i, connector=gns3_server)
+            lab.get()
+            nodes_summary = lab.nodes_summary(is_print=False)
+            # text = nodes_summary.json()
+            # print(nodes_summary)
+            text = str(nodes_summary) + ", " + i
+            use = text.split(", ")
+            # print(text.split(", "))
+            writer.writerow(use)
+            # print((tabulate(nodes_summary, headers=["Node", "Status", "Console Port", "ID", "Project"])), i)
 
     return render(request, 'file_report.html')
 

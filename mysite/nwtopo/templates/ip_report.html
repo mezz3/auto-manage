@@ -27,6 +27,11 @@ $("input[type='submit']").click(function() { return false; });
                                                                 <span class="vc_title-text">IP Report</span>
                                                             </a>
                                                         </li>
+                                                        <li class="vc_tab" data-vc-tab>
+                                                            <a href="{% url 'file_report' %}" class="vc">
+                                                                <span class="vc_title-text"  style="color: #fff;">File Report</span>
+                                                            </a>
+                                                        </li>
                                                     </ul>
                                                 </div>
                                                         
@@ -37,21 +42,23 @@ $("input[type='submit']").click(function() { return false; });
                                                             <div class="vc_panel-body">
                                                                 <div class="vc_border">
                                                                     <div class="from-group container">
-                                                                            {% comment %} <table class="table">
-                                                                                <thead>
-                                                                                    <tr>
-                                                                                        <th scope="col">
-                                                                                            Template: Routing
-                                                                                            <a href="#">
-                                                                                                <div class="btn btn-primary" type="submit" style='float: right'>Create Report</div>
-                                                                                            </a>
-                                                                                        </th>
-                                                                                        <th scope="col"></th>
-                                                                                    </tr>
-                                                                                </thead>
-                                                                                <tbody>
-                                                                                {% for temp in temp_deploy %}
-                                                                                    {% if temp not in temp_template %}
+                                                                    {% for template in temp_template %}
+                                                                        <table class="table">
+                                                                            <thead>
+                                                                                <tr>
+                                                                                    <th scope="col">Template: {{ template }}</th>
+                                                                                    <th scope="col">
+                                                                                        <a href="{% url 'create_report' temp_name=template %}">
+                                                                                            <div class="btn btn-primary" type="submit" style='float: right'>Create Report</div>
+                                                                                        </a>
+                                                                                    </th>
+                                                                                </tr>
+                                                                            </thead>
+                                                                            <tbody>
+                                                                            {% for temp in temp_deploy %}
+                                                                                {% if template in temp %}
+                                                                                    {% if temp|length <= template|length|add:3 %}
+                                                                                {% comment %} {{ template|length|add:3 }} {% endcomment %}
                                                                                     <tr>
                                                                                         <td>{{ temp }}</td>
                                                                                         <td>
@@ -61,42 +68,11 @@ $("input[type='submit']").click(function() { return false; });
                                                                                         </td>
                                                                                     </tr>
                                                                                     {% endif %}
-                                                                                {% endfor %}
-                                                                                </tbody>
-                                                                            </table> {% endcomment %}
-
-
-                                                                            {% for template in temp_template %}
-                                                                            <table class="table">
-                                                                                <thead>
-                                                                                    <tr>
-                                                                                        <th scope="col">Template: {{ template }}</th>
-                                                                                        <th scope="col">
-                                                                                            <a href="{% url 'create_report' temp_name=template %}">
-                                                                                                <div class="btn btn-primary" type="submit" style='float: right'>Create Report</div>
-                                                                                            </a>
-                                                                                        </th>
-                                                                                    </tr>
-                                                                                </thead>
-                                                                                <tbody>
-                                                                                {% for temp in temp_deploy %}
-                                                                                    {% if template in temp %}
-                                                                                        {% if temp|length <= template|length|add:3 %}
-                                                                                    {% comment %} {{ template|length|add:3 }} {% endcomment %}
-                                                                                        <tr>
-                                                                                            <td>{{ temp }}</td>
-                                                                                            <td>
-                                                                                                <a href="{% url 'deploy_del' deploy_name=temp %}">
-                                                                                                    <div class="btn btn-danger" type="submit">Delete</div>
-                                                                                                </a>
-                                                                                            </td>
-                                                                                        </tr>
-                                                                                        {% endif %}
-                                                                                    {% endif %}
-                                                                                {% endfor %}
-                                                                                </tbody>
-                                                                            </table>
+                                                                                {% endif %}
                                                                             {% endfor %}
+                                                                            </tbody>
+                                                                        </table>
+                                                                        {% endfor %}
                                                                     </div>
                                                         
                                                                 </div>
