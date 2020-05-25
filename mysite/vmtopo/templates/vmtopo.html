@@ -1,38 +1,175 @@
-{% extends "base2.html" %}
+{% extends "base_vm.html" %}
 {% block content %}
 {% load static %}
+<style>
+*{margin:0px; padding:0px; font-family:Helvetica, Arial, sans-serif;}
+
+/* Full-width input fields */
+input[type=text], input[type=password] {
+width: 90%;
+padding: 12px 20px;
+margin: 8px 26px;
+display: inline-block;
+border: 1px solid #ccc;
+box-sizing: border-box;
+font-size:16px;
+}
+
+/* Set a style for all buttons */
+button {
+background-color: #4CAF50;
+color: white;
+padding: 14px 20px;
+margin: 8px 26px;
+border: none;
+cursor: pointer;
+font-size:20px;
+}
+button:hover {
+opacity: 0.8;
+}
+
+/* Center the image and position the close button */
+.imgcontainer {
+text-align: center;
+margin: 24px 0 12px 0;
+position: relative;
+}
+.avatar {
+width: 200px;
+height:200px;
+border-radius: 50%;
+}
+
+/* The Modal (background) */
+.modal {
+display:none;
+position: fixed;
+z-index: 1;
+left: 0;
+top: 0;
+width: 100%;
+height: 100%;
+overflow: auto;
+background-color: rgba(0,0,0,0.4);
+}
+
+/* Modal Content Box */
+.modal-content {
+background-color: #fefefe;
+margin: 4% auto 15% auto;
+border: 1px solid #888;
+width: 40%;
+padding-bottom: 30px;
+}
+
+/* The Close Button (x) */
+.close {
+position: absolute;
+right: 25px;
+top: 0;
+color: #000;
+font-size: 35px;
+font-weight: bold;
+}
+.close:hover,.close:focus {
+color: red;
+cursor: pointer;
+}
+
+/* Add Zoom Animation */
+.animate {
+animation: zoom 0.6s
+}
+@keyframes zoom {
+from {transform: scale(0)}
+to {transform: scale(1)}
+}
+</style>
+<script>
+// If user clicks anywhere outside of the modal, Modal will close
+
+var modal = document.getElementById('modal-wrapper');
+window.onclick = function(event) {
+if (event.target == modal) {
+modal.style.display = 'none';
+}
+}
+</script>
+
+<script async src='//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js'></script>
+<ins class='adsbygoogle'
+style='display:block; text-align:center;'
+data-ad-layout='in-article'
+data-ad-format='fluid'
+data-ad-client='ca-pub-7013552742369373'
+data-ad-slot='5323679646'></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
     <div class="container">
-        <h1>Welcome to Class Attendance System</h1>
+    <br><br><br><br>
         <br/><br/>
+<div>
+            <button onclick="document.getElementById('modal-wrapper').style.display='block'" class="btn btn-primary">Create</button>
+        </div>
+        {% comment %} pop-up {% endcomment %}
+        <div id='modal-wrapper' class='modal'>
+            <form method='POST' class='modal-content animate' action="{% url 'vmtopo' %}" enctype='multipart/form-data'>
+            {% csrf_token %}
+                <div class='imgcontainer'>
+                    <span onclick="document.getElementById('modal-wrapper').style.display='none'" class='close' title='Close PopUp'>&times;</span>
+                    <h1 style='text-align: center'>Create PortGroup</h1>
+                </div>
+
+                <div class='container'>
+                    {% for field in form %}
+                            <div class="form-group">
+                                <label for="{{field.id_for_label}}">{{ field.label }}</label>
+                                    {{field}}
+                                <h6 style='color: red; margin-left: 20px'>{{ field.errors }}</h6>
+                            </div>
+                    {% endfor %}
+                    <br>
+                        <button class="btn btn-primary" style='float: right; margin-top: 3%' type="submit">Create</button>
+                </div>
+            </form>
+        </div>
+        <br>
+
         <table class="table">
             <thead>
                 <tr>
-                    <th scope="col">Template Project</th>
-                    <th scope="col"></th>
+                    <th scope="col">Name PortGroup</th>
+                    <th scope="col">Vlan</th>
                     <th scope="col"></th>
                     <th scope="col"></th>
                 </tr>
             </thead>
 
             <tbody>
+            {% for x in name_port %}
                 <tr>
-                    <td>test</td>
+                    <td>{{ x }}</td>
+                    
+                {% for y in vlan %}
+                    {% if forloop.counter == forloop.parentloop.counter %}
+                    <td>{{ y }}</td>
+                    {% endif %}
+                {% endfor %}
                     <td>
-                        <a href="{% url 'topo' %}">
-                            <div class="btn btn-warning" id="id">View Topo</div>
+                        <a href="{% url 'topo' pg_name=x %}">
+                            <div class="btn btn-primary">Detail</div>
                         </a>
                     </td>
                     <td>
-                        <a href="#">
-                            <div class="btn btn-primary" id="sub_id">Clone</div>
-                        </a>
-                    </td>
-                    <td>
-                        <a href="#">
-                            <div class="btn btn-primary" id="sub_id">Delete</div>
+                        <a href="{% url 'del_port' pg_name=x %}">
+                            <div class="btn btn-danger">Delete</div>
                         </a>
                     </td>
                 </tr>
+            {% endfor %}
             </tbody>
 
         </table>
