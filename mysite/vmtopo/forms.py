@@ -3,6 +3,12 @@ from pkg_resources import require
 from django.core.exceptions import ValidationError
 
 
+OS_CHOICES = [
+    (1, 'Windows10'),
+    (2, 'Linux'),
+    ]
+
+
 class CreatePGForm(forms.Form):
     pg_name = forms.CharField(max_length=100, required=True, label='PortGroup name')
     pg_vlan = forms.IntegerField(label='Vlan ID', required=True)
@@ -23,11 +29,11 @@ class CreatePGForm(forms.Form):
         return pg_vlan
 
 
-# class TemplateForm(forms.Form):
-#     temp_amount = forms.IntegerField(label='จำนวนที่ต้องการสร้าง', required=False)
+class CreateVM_pgForm(forms.Form):
+    vm_os = forms.ChoiceField(choices = OS_CHOICES, required=True, label='VM OS')
+    vm_name = forms.CharField(max_length=100, required=True, label='VM name')
+    # vm_vlan = forms.IntegerField(label='Vlan ID', required=True)
 
-
-# class DeploySearchForm(forms.Form):
-#     deploy_name = forms.CharField(max_length=255, label='ค้นหาชื่อโปรเจค', required=False)
-
-#     deploy_name.widget.attrs.update({'class': 'form-control'})
+    vm_name.widget.attrs.update({'class': 'form-control'})
+    vm_os.widget.attrs.update({'class': 'form-control'})
+    # vm_vlan.widget.attrs.update({'class': 'form-control'})

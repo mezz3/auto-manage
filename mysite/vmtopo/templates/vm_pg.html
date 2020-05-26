@@ -1,0 +1,71 @@
+{% extends "base_vm.html" %}
+{% block content %}
+{% load static %}
+<script>
+setTimeout(function() {
+     $.get("{% url 'vm_pg' %}") // Do something after 5 seconds
+}, 120000);
+</script>
+<head>
+    <link rel="stylesheet" href="{% static 'asset\content.css' %}">
+</head>
+<div class="container">
+        <br><br>
+       <div class="container site-content">
+        <div class="row">
+            <div id="main" class="site-main col-sm-12 full-width"> <!-- delete id -->
+                <article id="post-11500" class="post-11500 page type-page status-publish hentry pmpro-has-access"> <!-- delete id+class -->
+                    <div class="entry-content">
+                        <div data-vc-full-width="true" data-vc-full-width-init="true" class="vc_row wpb_row vc_row-fluid entry">
+                            <div class="wpb_column vc_column_contain vc_col-sm-12">
+                                <div class="vc_column_inner">
+                                    <div class="wpb_wrap">
+                                        <div class="vc_contain" data-vc-action="collapse">
+                                            <div class="vc vc_general vc_spacing vc_color">
+                                                <div class="vc_tab-contain" style='position: static !important;'>
+                                                    <ul class="vc_tab-list">
+                                                        <li class="vc_tab vc_active" style="background: #fff; position: sticky !important;" data-vc-tab>
+                                                            <a href="{% url 'vm_pg' %}" class="vc">
+                                                                <span class="vc_title-text">Create VM</span>
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                        
+
+                                                <div class="vc_panel-contain">
+                                                    <div class="vc_panels">
+                                                        <div class="vc_panel vc_active">
+                                                            <div class="vc_panel-body">
+                                                                <div class="vc_border">
+                                                                    <div class="from-group container">
+                                                                    <form method='POST' action="{% url 'vm_pg' %}">
+                                                                    {% csrf_token %}
+                                                                    {{form}}
+                                                                    <button class="btn btn-primary" style='float: right; margin-top: 3%' type="submit">ยืนยัน</button>
+                                                                       
+                                                                        </form>
+
+                                                                    </div>
+                                                        
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </div>
+
+</div>
+<br><br>
+{% endblock %}

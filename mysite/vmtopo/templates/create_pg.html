@@ -1,0 +1,89 @@
+{% extends "base_vm.html" %}
+{% block content %}
+{% load static %}
+<head>
+    <link rel="stylesheet" href="{% static 'asset\content.css' %}">
+</head>
+<div class="container">
+        <br><br>
+       <div class="container site-content">
+        <div class="row">
+            <div id="main" class="site-main col-sm-12 full-width"> <!-- delete id -->
+                <article id="post-11500" class="post-11500 page type-page status-publish hentry pmpro-has-access"> <!-- delete id+class -->
+                    <div class="entry-content">
+                        <div data-vc-full-width="true" data-vc-full-width-init="true" class="vc_row wpb_row vc_row-fluid entry">
+                            <div class="wpb_column vc_column_contain vc_col-sm-12">
+                                <div class="vc_column_inner">
+                                    <div class="wpb_wrap">
+                                        <div class="vc_contain" data-vc-action="collapse">
+                                            <div class="vc vc_general vc_spacing vc_color">
+                                                <div class="vc_tab-contain" style='position: static !important;'>
+                                                    <ul class="vc_tab-list">
+                                                        <li class="vc_tab vc_active" style="background: #fff; position: sticky !important;" data-vc-tab>
+                                                            <a href="#" class="vc">
+                                                                <span class="vc_title-text">Choose PortGroup</span>
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                        
+
+                                                <div class="vc_panel-contain">
+                                                    <div class="vc_panels">
+                                                        <div class="vc_panel vc_active">
+                                                            <div class="vc_panel-body">
+                                                                <div class="vc_border">
+                                                                    <div class="from-group container">
+                                                                    <table class="table">
+                                                                        <thead>
+                                                                            <tr>
+                                                                                <th scope="col">Name PortGroup</th>
+                                                                                <th scope="col">Vlan</th>
+                                                                                <th scope="col"></th>
+                                                                            </tr>
+                                                                        </thead>
+
+                                                                        <tbody>
+                                                                        {% for x in name_port %}
+                                                                            <tr>
+                                                                                <td>{{ x }}</td>
+                    
+                                                                            {% for y in vlan %}
+                                                                                {% if forloop.counter == forloop.parentloop.counter %}
+                                                                                <td>{{ y }}</td>
+                                                                                {% endif %}
+                                                                            {% endfor %}
+                                                                                <td>
+                                                                                    <a href="{% url 'choose_pg' pg_name=x %}">
+                                                                                        <div class="btn btn-primary">เลือก</div>
+                                                                                    </a>
+                                                                                </td>
+                                                                            </tr>
+                                                                            {% endfor %}
+                                                                        </tbody>
+
+                                                                    </table>
+
+                                                                    </div>
+                                                        
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </div>
+
+</div>
+<br><br>
+{% endblock %}
