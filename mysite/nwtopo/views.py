@@ -4,15 +4,15 @@ import sys
 from os import path
 from os.path import split
 from subprocess import check_output
-from tabulate import tabulate
+
 import gns3fy
 import requests
-
 from django.contrib.auth.decorators import login_required
+from django.core.files.storage import FileSystemStorage
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import redirect, render
 from django.views.generic import RedirectView
-from django.core.files.storage import FileSystemStorage
+from tabulate import tabulate
 
 from nwtopo.forms import CreateForm, DeploySearchForm, TemplateForm
 from nwtopo.models import Clone, Deploy, Template
@@ -128,8 +128,6 @@ def create_topo(request, temp_name):
     temp_id = dic[name]
     print(temp_id, name)
 
-
-
     return HttpResponseRedirect('http://10.0.15.21/static/web-ui/server/1/project/' + temp_id)
 
 
@@ -177,6 +175,10 @@ def deploy_temp_succ(request, temp_name):
             'static\\Scripts\\clone_file.py',
             str(temp_name),
         ])
+    
+    clone = Deploy.objects.get(pk=lastest.id)
+    clone.delete()
+
     return redirect('report')
 
 
@@ -210,6 +212,24 @@ def report(request):
 
     temp_deploy = set(keep_deploy) - set(temp_template)
     print(temp_deploy)
+
+    for i in temp_deploy:
+        gns3_server = gns3fy.Gns3Connector("http://10.0.15.21")
+        lab = gns3fy.Project(name=i, connector=gns3_server)
+        lab.get()
+        nodes_summary = lab.nodes_summary(is_print=False)
+        node = str(nodes_summary).split(', ')
+
+        project_id = str(lab).split(', ')
+        project_id = project_id[1].replace('project_id=', '')
+        project_id = project_id.replace("'", '')
+        print("this is id project:", project_id)
+        test = check_output([
+            'python.exe',
+            'static\\Scripts\\start_node.py',
+            # str(all_id),
+            str(project_id),
+        ])
     
     return render(request, 'ip_report.html', {'temp_template': temp_template, 'temp_deploy': temp_deploy})
 

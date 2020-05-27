@@ -226,4 +226,8 @@ def choose_pg(request, pg_name):
         str(vm_name),
         str(pg_name),
     ])
+
+    vm_pg = VM_pg.objects.get(pk=lastest.id)
+    vm_pg.delete()
+
     return redirect('vmtopo')
