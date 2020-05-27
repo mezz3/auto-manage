@@ -7,6 +7,7 @@ from subprocess import check_output
 from tabulate import tabulate
 import gns3fy
 import requests
+import time
 
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
@@ -170,6 +171,8 @@ def vm_pg(request):
                 str(vm_os),
                 str(vm_name),
             ])
+
+            time.sleep(120)
             return redirect('createVM_pg')
     else:
         form = CreateVM_pgForm()
