@@ -20,6 +20,8 @@ class CreatePGForm(forms.Form):
         pg_name = self.cleaned_data['pg_name']
         if pg_name == None or pg_name == '':
             raise  forms.ValidationError("ยังไม่ได้ทำการระบุชื่อ")
+        if ' ' in pg_name:
+            raise  forms.ValidationError("ห้ามมีช่องว่างภายในชื่อ")
         return pg_name
 
     def clean_pg_vlan(self):
