@@ -4,6 +4,7 @@ import sys
 from os import path
 from os.path import split
 from subprocess import check_output
+import time
 
 import gns3fy
 import requests
@@ -178,6 +179,7 @@ def deploy_temp_succ(request, temp_name):
     
     clone = Deploy.objects.get(pk=lastest.id)
     clone.delete()
+    time.sleep(60)
 
     return redirect('report')
 
@@ -224,12 +226,19 @@ def report(request):
         project_id = project_id[1].replace('project_id=', '')
         project_id = project_id.replace("'", '')
         print("this is id project:", project_id)
-        test = check_output([
+        start = check_output([
             'python.exe',
-            'static\\Scripts\\start_node.py',
+            'static\\Scripts\\start_project.py',
             # str(all_id),
             str(project_id),
         ])
+        # test = check_output([
+        #     'python.exe',
+        #     'static\\Scripts\\start_node.py',
+        #     # str(all_id),
+        #     str(project_id),
+        # ])
+        # time.sleep(5)
     
     return render(request, 'ip_report.html', {'temp_template': temp_template, 'temp_deploy': temp_deploy})
 
@@ -241,6 +250,42 @@ def create_report(request, temp_name):
     url = 'http://10.0.15.21/v2/projects'
     web_data = requests.get(url)
     text = web_data.json()
+
+    dic = {}
+    for i in text:
+        key = i['name']
+        if key not in dic.keys():
+            dic[key] = i['project_id']
+    keep_deploy = []
+    for i in dic.keys():
+        keep_deploy.append(i)
+    temp_template = []
+    for temp in template_list:
+        temp_template.append(temp.temp_name)
+
+    temp_deploy = set(keep_deploy) - set(temp_template)
+
+    for i in temp_deploy:
+        gns3_server = gns3fy.Gns3Connector("http://10.0.15.21")
+        lab = gns3fy.Project(name=i, connector=gns3_server)
+        lab.get()
+        nodes_summary = lab.nodes_summary(is_print=False)
+        node = str(nodes_summary).split(', ')
+
+        project_id = str(lab).split(', ')
+        project_id = project_id[1].replace('project_id=', '')
+        project_id = project_id.replace("'", '')
+        print("this is id project:", project_id)
+        test = check_output([
+            'python.exe',
+            'static\\Scripts\\start_node.py',
+            # str(all_id),
+            str(project_id),
+        ])
+
+    # url = 'http://10.0.15.21/v2/projects'
+    # web_data = requests.get(url)
+    # text = web_data.json()
 
     dic = {}
     for i in text:

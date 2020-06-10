@@ -1,3 +1,1 @@
 Node,Status,Console Port,ID,Project
-[('R1',None,5000,'7f96d747-21fd-4dcb-92f9-684db23520ec'),('ESW1',None,5001,'917d9626-0255-4572-aab5-a7e0658c70f7'),('PC1',None,5002,'e8bcd9d9-5a4a-4279-8599-84e79258d3c5')],test-2
-[('R1',None,5000,'b9eec4f5-7b6c-495a-b259-cf40fb24687e'),('ESW1',None,5001,'0a3294fb-77f4-4675-9c8c-9fb4d0a32a05'),('PC1',None,5002,'80ccf32b-44b8-44df-a70b-e8d302cb1755')],test-1
