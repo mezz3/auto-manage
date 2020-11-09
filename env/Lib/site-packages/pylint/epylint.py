@@ -1,4 +1,4 @@
-# -*- coding: utf-8;
+# -*- coding: utf-8 -*-
 # mode: python; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4
 # -*- vim:fenc=utf-8:ft=python:et:sw=4:ts=4:sts=4
 
@@ -8,7 +8,7 @@
 # Copyright (c) 2014 Manuel Vázquez Acosta <mva.led@gmail.com>
 # Copyright (c) 2014 Derek Harland <derek.harland@finq.co.nz>
 # Copyright (c) 2014 Arun Persaud <arun@nubati.net>
-# Copyright (c) 2015-2017 Claudiu Popa <pcmanticore@gmail.com>
+# Copyright (c) 2015-2020 Claudiu Popa <pcmanticore@gmail.com>
 # Copyright (c) 2015 Mihai Balint <balint.mihai@gmail.com>
 # Copyright (c) 2015 Ionel Cristian Maries <contact@ionelmc.ro>
 # Copyright (c) 2017 hippo91 <guillaume.peillex@gmail.com>
@@ -17,6 +17,10 @@
 # Copyright (c) 2018 Ryan McGuire <ryan@enigmacurry.com>
 # Copyright (c) 2018 thernstig <30827238+thernstig@users.noreply.github.com>
 # Copyright (c) 2018 Radostin Stoyanov <rst0git@users.noreply.github.com>
+# Copyright (c) 2019 Hugo van Kemenade <hugovk@users.noreply.github.com>
+# Copyright (c) 2019 Pierre Sassoulas <pierre.sassoulas@gmail.com>
+# Copyright (c) 2020 Damien Baty <damien.baty@polyconseil.fr>
+# Copyright (c) 2020 Anthony Sottile <asottile@umich.edu>
 
 # Licensed under the GPL: https://www.gnu.org/licenses/old-licenses/gpl-2.0.html
 # For details: https://github.com/PyCQA/pylint/blob/master/COPYING
@@ -53,10 +57,10 @@ You may also use py_run to run pylint with desired options and get back (or not)
 its output.
 """
 import os
-import os.path as osp
 import shlex
 import sys
 from io import StringIO
+from os import path as osp
 from subprocess import PIPE, Popen
 
 
